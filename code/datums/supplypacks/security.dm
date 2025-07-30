@@ -307,3 +307,67 @@
 	containername = "security voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = ACCESS_BRIG
+
+/decl/hierarchy/supply_pack/security/classa
+	name = "Amnestics - Class-A"
+	contains = list(/obj/item/storage/pill_bottle/amnesticsa = 2)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "amnestics crate"
+	access = ACCESS_SECURITY
+
+/decl/hierarchy/supply_pack/security/classb
+	name = "Amnestics - Class-B"
+	contains = list(/obj/item/storage/pill_bottle/amnesticsb = 1)
+	cost = 40
+	containertype = /obj/structure/closet/crate/secure
+	containername = "amnestics crate"
+	access = ACCESS_SECURITY
+
+/decl/hierarchy/supply_pack/security/classc
+	name = "Amnestics - Class-C"
+	contains = list(/obj/item/reagent_containers/syringe/amnesticsc)
+	cost = 60
+	containertype = /obj/structure/closet/crate/secure
+	containername = "amnestics crate"
+	access = ACCESS_SECURITY
+
+/decl/hierarchy/supply_pack/security/classe
+	name = "Amnestics - Class-E"
+	contains = list(/obj/item/reagent_containers/syringe/amnesticse = 3)
+	cost = 80
+	containertype = /obj/structure/closet/crate/secure
+	containername = "amnestics crate"
+	access = ACCESS_SECURITY
+
+/decl/hierarchy/supply_pack/security/classf
+	name = "Amnestics - Class-F"
+	contains = list(/obj/item/reagent_containers/ivbag/amnesticsf)
+	cost = 250
+	containertype = /obj/structure/closet/crate/secure
+	containername = "amnestics crate"
+	access = ACCESS_ADMIN_LVL5
+
+/decl/hierarchy/supply_pack/security/classg
+	name = "Amnestics - Class-G"
+	contains = list(/obj/item/reagent_containers/syringe/amnesticsg = 3)
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "amnestics crate"
+	access = ACCESS_SECURITY
+
+/decl/hierarchy/supply_pack/security/classh
+	name = "Amnestics - Class-H"
+	contains = list(/obj/item/storage/pill_bottle/amnesticsh)
+	cost = 70
+	containertype = /obj/structure/closet/crate/secure
+	containername = "amnestics crate"
+	access = ACCESS_SECURITY
+
+/decl/hierarchy/supply_pack/security/classi
+	name = "Amnestics - Class-I"
+	contains = list(/obj/item/storage/pill_bottle/amnesticsi)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "amnestics crate"
+	access = ACCESS_SECURITY

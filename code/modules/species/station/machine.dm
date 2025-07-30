@@ -2,11 +2,11 @@
 	name = SPECIES_IPC
 	name_plural = "machines"
 
-	description = "Positronic intelligence really took off in the 26th century, and it is not uncommon to see independant, free-willed \
-	robots on many human stations, particularly in fringe systems where standards are slightly lax and public opinion less relevant \
-	to corporate operations. IPCs (Integrated Positronic Chassis) are a loose category of self-willed robots with a humanoid form, \
-	generally self-owned after being 'born' into servitude; they are reliable and dedicated workers, albeit more than slightly \
-	inhuman in outlook and perspective."
+	description = "Positronic intelligence really took off in the 21st century, and it is not uncommon to see independant, free-willed \
+	robots in the anolmalous world, particularly where Anderson Robotics is involved. IPCs (Integrated Positronic Chassis) are a \
+	loose category of self-willed robots with a humanoid form, generally owned and produced by Anderson Robotics. They are occasionally \
+	quietly purchased or seized from them by the SCP Foundation, or produced in-house by the SCP Foundation using assets aquired from \
+	Prometheus Labs. They are reliable and dedicated workers, albeit more than slightly inhuman in outlook and perspective."
 	cyborg_noun = null
 
 	preview_icon = 'icons/mob/human_races/species/ipc/preview.dmi'
@@ -33,7 +33,7 @@
 	passive_temp_gain = 5  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_DISEASE
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION 
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_UNDERWEAR | HAS_EYE_COLOR //IPCs can wear undies too :(
 
 	blood_color = "#1f181f"

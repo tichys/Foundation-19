@@ -59,7 +59,9 @@
 
 		if(do_after(user, mopspeed, T, bonus_percentage = 25))
 			if(T)
-				T.clean(src, user)
+				T.clean(src, user) //Make sure the tile is properly cleaned up before getting rid of nasty decals below.
+				var/obj/effect/decal/cleanable/D = locate() in T
+				qdel(D) //If Soap can do it, why can't we do it too!
 			to_chat(user, SPAN_NOTICE("You have finished mopping!"))
 
 

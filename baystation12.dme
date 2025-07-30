@@ -3168,6 +3168,7 @@
 #include "code\modules\SCP\SCPs\SCP-420-J.dm"
 #include "code\modules\SCP\SCPs\SCP-427.dm"
 #include "code\modules\SCP\SCPs\SCP-457.dm"
+#include "code\modules\SCP\SCPs\SCP-458.dm"
 #include "code\modules\SCP\SCPs\SCP-500.dm"
 #include "code\modules\SCP\SCPs\SCP-5000.dm"
 #include "code\modules\SCP\SCPs\SCP-513.dm"

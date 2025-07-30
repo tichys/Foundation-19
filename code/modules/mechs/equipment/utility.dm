@@ -948,7 +948,7 @@
 	if(reagents.total_volume < 2 || !active)
 		deactivate()
 		return
-	playsound(owner, 'sounds/mecha/enginestarted.ogg', 100, FALSE)
+	playsound(owner, 'sounds/mecha/engineloop.ogg', 100, FALSE)
 	var/power_gap = internal_cell.maxcharge - internal_cell.charge
 	if(power_gap < 5)
 		return

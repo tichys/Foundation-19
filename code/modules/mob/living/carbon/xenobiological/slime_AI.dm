@@ -143,13 +143,13 @@
 		if(Target.Adjacent(src))
 			if(istype(Target, /mob/living/silicon)) // Glomp the silicons
 				a_intent = I_HURT
-				if(attack_cooldown_ticks < 0)
+				if(attack_cooldown_ticks == 0)
 					UnarmedAttack(Target)
 					attack_cooldown_ticks = 3
 
 			else if(Target.client && !Target.lying && prob(60 + powerlevel * 4)) // Try to take down the target first
 				a_intent = I_DISARM
-				if(attack_cooldown_ticks < 0)
+				if(attack_cooldown_ticks == 0)
 					UnarmedAttack(Target)
 					attack_cooldown_ticks = 3
 
@@ -157,7 +157,7 @@
 				a_intent = I_GRAB
 				if(invalidFeedTarget(Target))
 					a_intent = I_HURT //just glomp them instead
-				if(attack_cooldown_ticks < 0)
+				if(attack_cooldown_ticks == 0)
 					UnarmedAttack(Target)
 					attack_cooldown_ticks = 3
 

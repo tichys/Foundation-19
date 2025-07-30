@@ -2656,7 +2656,7 @@
 /obj/machinery/door/window{
 	dir = 4;
 	name = "Auxiliary Storage";
-	req_access = list("ACCESS_ADMIN_LEVEL2")
+	req_access = list("ACCESS_ADMIN_LEVEL1")
 	},
 /obj/effect/floor_decal/spline/fancy/black,
 /obj/effect/floor_decal/spline/fancy/black{
@@ -51809,6 +51809,9 @@
 /obj/effect/floor_decal/spline/fancy/black/corner{
 	dir = 8
 	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/site53/logistics/logistics)
 "kHb" = (
@@ -63602,6 +63605,9 @@
 /obj/machinery/conveyor/east{
 	id_tag = "fooddelivery";
 	id = "fooddelivery"
+	},
+/obj/structure/window/reinforced{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/site53/logistics/logistics)
@@ -91055,6 +91061,9 @@
 /obj/effect/floor_decal/spline/fancy/black/corner{
 	dir = 8
 	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/site53/logistics/logistics)
 "sOS" = (
@@ -91676,6 +91685,9 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/spline/fancy/black,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/site53/logistics/logistics)
 "sUT" = (
@@ -347277,7 +347289,7 @@ ktp
 ktp
 ktp
 ktp
-gDo
+ktp
 gDo
 gDo
 gDo
@@ -347534,8 +347546,8 @@ ktp
 ktp
 ktp
 ktp
-gDo
-gDo
+ktp
+ktp
 gDo
 gDo
 gDo
@@ -347791,8 +347803,8 @@ mpg
 ktp
 ktp
 ktp
-gDo
-gDo
+ktp
+ktp
 gDo
 gDo
 gDo
@@ -348048,8 +348060,8 @@ mpg
 ktp
 ktp
 ktp
-gDo
-gDo
+ktp
+ktp
 gDo
 gDo
 gDo
@@ -348305,8 +348317,8 @@ mpg
 ktp
 ktp
 ktp
-gDo
-gDo
+ktp
+ktp
 gDo
 gDo
 gDo
@@ -348562,8 +348574,8 @@ mpg
 ktp
 ktp
 ktp
-gDo
-gDo
+ktp
+ktp
 gDo
 gDo
 gDo
@@ -348819,8 +348831,8 @@ mpg
 ktp
 ktp
 ktp
-gDo
-gDo
+ktp
+ktp
 gDo
 gDo
 gDo
@@ -349077,7 +349089,7 @@ mpg
 ktp
 ktp
 ktp
-gDo
+ktp
 gDo
 gDo
 gDo
@@ -349334,7 +349346,7 @@ mpg
 ktp
 ktp
 ktp
-gDo
+ktp
 gDo
 gDo
 gDo
