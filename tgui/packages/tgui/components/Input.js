@@ -7,7 +7,6 @@
 import { KEY_ENTER, KEY_ESCAPE } from 'common/keycodes';
 import { classes } from 'common/react';
 import { Component, createRef } from 'inferno';
-
 import { Box } from './Box';
 
 // prettier-ignore
@@ -43,9 +42,10 @@ export class Input extends Component {
     this.handleBlur = (e) => {
       const { editing } = this.state;
       const { onChange } = this.props;
+      const { strict } = this.props;
       if (editing) {
         this.setEditing(false);
-        if (onChange) {
+        if (onChange && !strict) {
           onChange(e, e.target.value);
         }
       }
@@ -127,6 +127,7 @@ export class Input extends Component {
       value,
       maxLength,
       placeholder,
+      strict,
       ...boxProps
     } = props;
     // Box props
@@ -139,12 +140,12 @@ export class Input extends Component {
           monospace && 'Input--monospace',
           className,
         ])}
-        {...rest}
-      >
+        {...rest}>
         <div className="Input__baseline">.</div>
         <input
           ref={this.inputRef}
           className="Input__input"
+          type="search"
           placeholder={placeholder}
           onInput={this.handleInput}
           onFocus={this.handleFocus}

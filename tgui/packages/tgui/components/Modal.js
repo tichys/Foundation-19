@@ -5,7 +5,6 @@
  */
 
 import { classes } from 'common/react';
-
 import { computeBoxClassName, computeBoxProps } from './Box';
 import { Dimmer } from './Dimmer';
 
@@ -15,8 +14,7 @@ export const Modal = (props) => {
     <Dimmer>
       <div
         className={classes(['Modal', className, computeBoxClassName(rest)])}
-        {...computeBoxProps(rest)}
-      >
+        {...computeBoxProps(rest)}>
         {children}
       </div>
     </Dimmer>

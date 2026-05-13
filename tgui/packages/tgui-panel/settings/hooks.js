@@ -5,8 +5,7 @@
  */
 
 import { useDispatch, useSelector } from 'common/redux';
-
-import { toggleSettings, updateSettings } from './actions';
+import { updateSettings, toggleSettings } from './actions';
 import { selectSettings } from './selectors';
 
 export const useSettings = (context) => {

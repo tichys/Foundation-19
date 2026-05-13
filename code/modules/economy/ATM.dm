@@ -126,7 +126,7 @@
 		if(emagged > 0)
 			t += "<span class='bad'><b>LOCKED</b><br>Unauthorized terminal access detected!<br>This ATM has been locked down.</span></div><BR>"
 		else
-			t += "<a href='?src=\ref[src];choice=insert_card'>[held_card ? held_card.name : "No card inserted"]</a></div><BR>"
+			t += "<a href='byond://?src=\ref[src];choice=insert_card'>[held_card ? held_card.name : "No card inserted"]</a></div><BR>"
 			t += "<div class='statusDisplay'>"
 			if(ticks_left_locked_down > 0)
 				t += "<span class='bad'>Maximum number of pin attempts exceeded! Access to this ATM has been temporarily disabled.</span></div>"
@@ -138,17 +138,17 @@
 						if(CHANGE_SECURITY_LEVEL)
 							t += "Select a new security level for this account:<br><hr>"
 							if(authenticated_account.security_level != 0)
-								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=0'>Select Minimum Security</a><BR>"
+								t += "<A href='byond://?src=\ref[src];choice=change_security_level;new_security_level=0'>Select Minimum Security</a><BR>"
 							else
 								t += "<span class='good'><b>Minimum security set: </b></span><BR>"
 							t += "Either the account number or card is required to access this account. EFTPOS transactions will require a card and ask for a pin, but not verify the pin is correct.<hr>"
 							if(authenticated_account.security_level != 1)
-								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=1'>Select Moderate Security</a><BR>"
+								t += "<A href='byond://?src=\ref[src];choice=change_security_level;new_security_level=1'>Select Moderate Security</a><BR>"
 							else
 								t += "<span class='average'><b>Moderate Security set: </b></span><BR>"
 							t += "An account number and pin must be manually entered to access this account and process transactions.<hr>"
 							if(authenticated_account.security_level != 2)
-								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=2'>Select Maximum Security</a><BR>"
+								t += "<A href='byond://?src=\ref[src];choice=change_security_level;new_security_level=2'>Select Maximum Security</a><BR>"
 							else
 								t += "<span class='bad'><b>Maximum security Set: </b></span><BR>"
 							t += "High - In addition to account number, a pin and a card is required to access this account and process transactions.<hr><br>"
@@ -173,7 +173,7 @@
 								t += "<td>[T.get_source_name()]</td>"
 								t += "</tr>"
 							t += "</table>"
-							t += "<A href='?src=\ref[src];choice=print_transaction'>Print</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=print_transaction'>Print</a><br>"
 						if(TRANSFER_FUNDS)
 							t += "<b>Account balance:</b> [GLOB.using_map.local_currency_name_short][authenticated_account.money]<br>"
 							t += "<form name='transfer' action='?src=\ref[src]' method='get'>"
@@ -191,16 +191,16 @@
 							t += "<input type='radio' name='choice' value='withdrawal' checked> Cash  <input type='radio' name='choice' value='e_withdrawal'> Chargecard<br>"
 							t += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw'>"
 							t += "</form>"
-							t += "<A href='?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
-							t += "<A href='?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
-							t += "<A href='?src=\ref[src];choice=view_screen;view_screen=3'>View transaction log</a><br>"
-							t += "<A href='?src=\ref[src];choice=balance_statement'>Print balance statement</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=3'>View transaction log</a><br>"
+							t += "<A href='byond://?src=\ref[src];choice=balance_statement'>Print balance statement</a><br>"
 
 					//Logout/back buttons, put here for some modularity and for less repeated code
 					if(view_screen == NO_SCREEN)
-						t += "<A href='?src=\ref[src];choice=logout'>Logout</a><br></div>"
+						t += "<A href='byond://?src=\ref[src];choice=logout'>Logout</a><br></div>"
 					else
-						t += "<A href='?src=\ref[src];choice=view_screen;view_screen=0'>Back</a></div>"
+						t += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=0'>Back</a></div>"
 
 			else
 				//change our display depending on account security levels

@@ -116,7 +116,7 @@
 /obj/structure/chorus/spawner/activate()
 	for(var/mob/observer/ghost/ghost in GLOB.player_list)
 		if(MODE_DEITY in ghost.client.prefs.be_special_role)
-			to_chat(ghost, SPAN_NOTICE("A chorus spawn is available! <a href='?src=\ref[src];jump=1'>(Jump)</a>"))
+			to_chat(ghost, SPAN_NOTICE("A chorus spawn is available! <a href='byond://?src=\ref[src];jump=1'>(Jump)</a>"))
 
 /obj/structure/chorus/spawner/OnTopic(user, href_list)
 	if(href_list["jump"] && istype(user,/mob/observer/ghost))

@@ -4,9 +4,8 @@
  * @license MIT
  */
 
-import { pureComponentHooks } from 'common/react';
-
 import { Table } from './Table';
+import { pureComponentHooks } from 'common/react';
 
 /** @deprecated */
 export const Grid = (props) => {

@@ -44,7 +44,7 @@
 	else
 		return "ERROR"
 
-	return "<a href='?mentorreply=[ckey]'>[ckey][!C ? "(DC)" : ""]</a>"
+	return "<a href='byond://?mentorreply=[ckey]'>[ckey][!C ? "(DC)" : ""]</a>"
 
 /proc/is_mentor(client/C)
 	return check_rights(R_MENTOR, 1, C)

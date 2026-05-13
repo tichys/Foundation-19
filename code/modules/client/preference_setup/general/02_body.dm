@@ -154,25 +154,25 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	send_rsc(user, pref.preview_icon, "previewicon.png")
 
 	var/datum/species/mob_species = all_species[pref.species]
-	var/title = "<b>Species<a href='?src=\ref[src];show_species=1'><small>?</small></a>:</b> <a href='?src=\ref[src];set_species=1'>[mob_species.name]</a>"
-	var/append_text = "<a href='?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a>"
+	var/title = "<b>Species<a href='byond://?src=\ref[src];show_species=1'><small>?</small></a>:</b> <a href='byond://?src=\ref[src];set_species=1'>[mob_species.name]</a>"
+	var/append_text = "<a href='byond://?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a>"
 	. += "<hr>"
 	. += mob_species.get_description(title, append_text, verbose = !hide_species, skip_detail = TRUE, skip_photo = TRUE)
 	. += "<table><tr style='vertical-align:top'><td><b>Body</b> "
-	. += "(<a href='?src=\ref[src];random=1'>&reg;</A>)"
+	. += "(<a href='byond://?src=\ref[src];random=1'>&reg;</A>)"
 	. += "<br>"
 
-	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
+	. += "Blood Type: <a href='byond://?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
 
 	if(has_flag(mob_species, HAS_BASE_SKIN_COLOURS))
-		. += "Base Colour: <a href='?src=\ref[src];base_skin=1'>[pref.s_base]</a><br>"
+		. += "Base Colour: <a href='byond://?src=\ref[src];base_skin=1'>[pref.s_base]</a><br>"
 
 	if(has_flag(mob_species, HAS_A_SKIN_TONE))
-		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/[mob_species.max_skin_tone()]</a><br>"
+		. += "Skin Tone: <a href='byond://?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/[mob_species.max_skin_tone()]</a><br>"
 
-	. += "Needs Glasses: <a href='?src=\ref[src];char_nearsighted=1'><b>[pref.char_nearsighted ? "Yes" : "No"]</b></a><br>"
-	. += "Limbs: <a href='?src=\ref[src];limbs=1'>Adjust</a> <a href='?src=\ref[src];reset_limbs=1'>Reset</a><br>"
-	. += "Internal Organs: <a href='?src=\ref[src];organs=1'>Adjust</a><br>"
+	. += "Needs Glasses: <a href='byond://?src=\ref[src];char_nearsighted=1'><b>[pref.char_nearsighted ? "Yes" : "No"]</b></a><br>"
+	. += "Limbs: <a href='byond://?src=\ref[src];limbs=1'>Adjust</a> <a href='byond://?src=\ref[src];reset_limbs=1'>Reset</a><br>"
+	. += "Internal Organs: <a href='byond://?src=\ref[src];organs=1'>Adjust</a><br>"
 
 	//display limbs below
 	var/ind = 0
@@ -264,37 +264,37 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		. += "<table>"
 		for(var/entry in pref.body_descriptors)
 			var/datum/mob_descriptor/descriptor = mob_species.descriptors[entry]
-			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]:</b></td><td>[descriptor.get_standalone_value_descriptor(pref.body_descriptors[entry])]</td><td><a href='?src=\ref[src];change_descriptor=[entry]'>Change</a><br/></td></tr>"
+			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]:</b></td><td>[descriptor.get_standalone_value_descriptor(pref.body_descriptors[entry])]</td><td><a href='byond://?src=\ref[src];change_descriptor=[entry]'>Change</a><br/></td></tr>"
 		. += "</table><br>"
 
 	. += "</td><td><b>Preview</b><br>"
 	. += "<div class='statusDisplay'><center><img src=previewicon.png width=[pref.preview_icon.Width()] height=[pref.preview_icon.Height()]></center></div>"
-	. += "<br><a href='?src=\ref[src];cycle_bg=1'>Cycle background</a>"
-	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[pref.equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a>"
-	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[pref.equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
+	. += "<br><a href='byond://?src=\ref[src];cycle_bg=1'>Cycle background</a>"
+	. += "<br><a href='byond://?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[pref.equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a>"
+	. += "<br><a href='byond://?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[pref.equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
 	. += "</td></tr></table>"
 
 	. += "<b>Hair</b><br>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_hair & 0xFF)][num2hex(pref.g_hair & 0xFF)][num2hex(pref.b_hair & 0xFF)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_hair & 0xFF)][num2hex(pref.g_hair & 0xFF)][num2hex(pref.b_hair & 0xFF)]'><tr><td>__</td></tr></table></font> "
-	. += " Style: [UIBUTTON("hair_style=1;decrement", "<", null)][UIBUTTON("hair_style=1;increment", ">", null)]<a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
+		. += "<a href='byond://?src=\ref[src];hair_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_hair & 0xFF)][num2hex(pref.g_hair & 0xFF)][num2hex(pref.b_hair & 0xFF)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_hair & 0xFF)][num2hex(pref.g_hair & 0xFF)][num2hex(pref.b_hair & 0xFF)]'><tr><td>__</td></tr></table></font> "
+	. += " Style: [UIBUTTON("hair_style=1;decrement", "<", null)][UIBUTTON("hair_style=1;increment", ">", null)]<a href='byond://?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
 
 	. += "<br><b>Facial</b><br>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial & 0xFF)][num2hex(pref.g_facial & 0xFF)][num2hex(pref.b_facial & 0xFF)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial & 0xFF)][num2hex(pref.g_facial & 0xFF)][num2hex(pref.b_facial & 0xFF)]'><tr><td>__</td></tr></table></font> "
-	. += " Style: [UIBUTTON("facial_style=1;decrement", "<", null)][UIBUTTON("facial_style=1;increment", ">", null)]<a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
+		. += "<a href='byond://?src=\ref[src];facial_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial & 0xFF)][num2hex(pref.g_facial & 0xFF)][num2hex(pref.b_facial & 0xFF)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial & 0xFF)][num2hex(pref.g_facial & 0xFF)][num2hex(pref.b_facial & 0xFF)]'><tr><td>__</td></tr></table></font> "
+	. += " Style: [UIBUTTON("facial_style=1;decrement", "<", null)][UIBUTTON("facial_style=1;increment", ">", null)]<a href='byond://?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
 
 	if(has_flag(mob_species, HAS_EYE_COLOR))
 		. += "<br><b>Eyes</b><br>"
-		. += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes & 0xFF)][num2hex(pref.g_eyes & 0xFF)][num2hex(pref.b_eyes & 0xFF)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes & 0xFF)][num2hex(pref.g_eyes & 0xFF)][num2hex(pref.b_eyes & 0xFF)]'><tr><td>__</td></tr></table></font><br>"
+		. += "<a href='byond://?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes & 0xFF)][num2hex(pref.g_eyes & 0xFF)][num2hex(pref.b_eyes & 0xFF)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes & 0xFF)][num2hex(pref.g_eyes & 0xFF)][num2hex(pref.b_eyes & 0xFF)]'><tr><td>__</td></tr></table></font><br>"
 
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
 		. += "<br><b>Body Color</b><br>"
-		. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_skin & 0xFF)][num2hex(pref.g_skin & 0xFF)][num2hex(pref.b_skin & 0xFF)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin & 0xFF)][num2hex(pref.g_skin & 0xFF)][num2hex(pref.b_skin & 0xFF)]'><tr><td>__</td></tr></table></font><br>"
+		. += "<a href='byond://?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_skin & 0xFF)][num2hex(pref.g_skin & 0xFF)][num2hex(pref.b_skin & 0xFF)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin & 0xFF)][num2hex(pref.g_skin & 0xFF)][num2hex(pref.b_skin & 0xFF)]'><tr><td>__</td></tr></table></font><br>"
 
-	. += "<br><a href='?src=\ref[src];marking_style=1'>Body Markings +</a><br>"
+	. += "<br><a href='byond://?src=\ref[src];marking_style=1'>Body Markings +</a><br>"
 	for(var/M in pref.body_markings)
-		. += "[M] <a href='?src=\ref[src];marking_remove=[M]'>-</a> <a href='?src=\ref[src];marking_color=[M]'>Color</a>"
+		. += "[M] <a href='byond://?src=\ref[src];marking_remove=[M]'>-</a> <a href='byond://?src=\ref[src];marking_color=[M]'>Color</a>"
 		. += "<font face='fixedsys' size='3' color='[pref.body_markings[M]]'><table style='display:inline;' bgcolor='[pref.body_markings[M]]'><tr><td>__</td></tr></table></font>"
 		. += "<br>"
 

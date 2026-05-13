@@ -176,7 +176,7 @@
 			if(abs(amount) >= 1)
 				return round(amount + value)
 			else if(prob(100 * abs(amount)))
-				return value + sign(amount)
+				return value + _sign(amount)
 			return value
 		if(RANDOM_CHEM_EFFECT_FLOAT)
 			var/resolution = (maximum - minimum)/100

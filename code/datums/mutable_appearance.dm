@@ -6,16 +6,11 @@
 
 // Mutable appearances erase template vars on new, because they accept an appearance to copy as an arg
 // If we have nothin to copy, we set the float plane
-#if DM_BUILD > 1642
-/mutable_appearance/proc/New(mutable_appearance/to_copy)
-	if(!to_copy)
-		plane = FLOAT_PLANE
-#else
+
 /mutable_appearance/New(mutable_appearance/to_copy)
 	..()
 	if(!to_copy)
 		plane = FLOAT_PLANE
-#endif	// Fix for broken proc on latest version of BYOND.
 
 /** Helper similar to image()
  *

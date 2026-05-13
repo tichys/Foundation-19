@@ -5,7 +5,6 @@
  */
 
 import { useSelector } from 'common/redux';
-
 import { selectGame } from './selectors';
 
 export const useGame = (context) => {

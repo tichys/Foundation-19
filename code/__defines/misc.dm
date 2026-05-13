@@ -235,7 +235,7 @@
 
 
 // Helper procs for easy HTML browser button creation.
-#define UIBUTTON(key, label, title) "[title ? title + ": " : ""]<a href='?src=\ref[src];[key]=1'>[label]</a>"
+#define UIBUTTON(key, label, title) "[title ? title + ": " : ""]<a href='byond://?src=\ref[src];[key]=1'>[label]</a>"
 
 #define UI_FONT_GOOD(X) FONT_COLORED("55cc55","[X]")
 #define UI_FONT_BAD(X) FONT_COLORED("cc5555","[X]")

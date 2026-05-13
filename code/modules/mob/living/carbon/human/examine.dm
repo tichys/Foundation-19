@@ -52,7 +52,7 @@
 			species_name += "[species.cyborg_noun] [species.get_bodytype(src)]"
 		else
 			species_name += "[species.name]"
-		msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [species_name]!</font></b>[SScodex.get_codex_entry(get_codex_value()) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
+		msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [species_name]!</font></b>[SScodex.get_codex_entry(get_codex_value()) ?  SPAN_NOTICE(" \[<a href='byond://?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
 
 	msg += "<br>"
 
@@ -288,8 +288,8 @@
 			if(R)
 				criminal = R.get_criminalStatus()
 
-			msg += "<span class = 'deptradio'>Criminal status:</span> <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
-			msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=`'>\[View\]</a>\n"
+			msg += "<span class = 'deptradio'>Criminal status:</span> <a href='byond://?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
+			msg += "<span class = 'deptradio'>Security records:</span> <a href='byond://?src=\ref[src];secrecord=`'>\[View\]</a>\n"
 
 			if(GLOB.informants.is_antagonist(mind))	// hacky, but functional
 				msg += "<span class = 'deptradio'>Special information:</span> This D-class is listed as an INFORMANT. Protect him, but do not blow his cover."
@@ -308,8 +308,8 @@
 		if(R)
 			medical = R.get_status()
 
-		msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
-		msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
+		msg += "<span class = 'deptradio'>Physical status:</span> <a href='byond://?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
+		msg += "<span class = 'deptradio'>Medical records:</span> <a href='byond://?src=\ref[src];medrecord=`'>\[View\]</a>\n"
 
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
@@ -400,6 +400,6 @@
 	HTML += TextPreview(flavor_texts["feet"])
 	HTML += "<br>"
 	HTML += "<hr />"
-	HTML +="<a href='?src=\ref[src];flavor_change=done'>\[Done\]</a>"
+	HTML +="<a href='byond://?src=\ref[src];flavor_change=done'>\[Done\]</a>"
 	HTML += "<tt>"
 	show_browser(src, jointext(HTML,null), "window=flavor_changes;size=430x300")

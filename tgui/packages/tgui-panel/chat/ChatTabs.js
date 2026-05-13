@@ -5,23 +5,21 @@
  */
 
 import { useDispatch, useSelector } from 'common/redux';
-import { Box, Button, Flex, Tabs } from 'tgui/components';
-
-import { openChatSettings } from '../settings/actions';
-import { addChatPage, changeChatPage } from './actions';
+import { Box, Tabs, Flex, Button } from 'tgui/components';
+import { changeChatPage, addChatPage } from './actions';
 import { selectChatPages, selectCurrentChatPage } from './selectors';
+import { openChatSettings } from '../settings/actions';
 
 const UnreadCountWidget = ({ value }) => (
   <Box
     style={{
       'font-size': '0.7em',
       'border-radius': '0.25em',
-      width: '1.7em',
+      'width': '1.7em',
       'line-height': '1.55em',
       'background-color': 'crimson',
-      color: '#fff',
-    }}
-  >
+      'color': '#fff',
+    }}>
     {Math.min(value, 99)}
   </Box>
 );
@@ -47,10 +45,9 @@ export const ChatTabs = (props, context) => {
                 dispatch(
                   changeChatPage({
                     pageId: page.id,
-                  }),
+                  })
                 )
-              }
-            >
+              }>
               {page.name}
             </Tabs.Tab>
           ))}

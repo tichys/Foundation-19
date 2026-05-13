@@ -42,19 +42,19 @@
 
 	//Snapshot is crazy and likes putting each topic hyperlink on a seperate line from any other tags so it's nice and clean.
 	interactions += "<HR><center><font size= \"1\">The fax will transmit everything above this line</font><br>"
-	interactions += "<A href='?src=\ref[src];confirm=1'>Send fax</A> "
-	interactions += "<A href='?src=\ref[src];cancel=1'>Cancel fax</A> "
+	interactions += "<A href='byond://?src=\ref[src];confirm=1'>Send fax</A> "
+	interactions += "<A href='byond://?src=\ref[src];cancel=1'>Cancel fax</A> "
 	interactions += "<BR>"
-	interactions += "<A href='?src=\ref[src];changelanguage=1'>Change language ([language])</A> "
-	interactions += "<A href='?src=\ref[src];change_template=1'>Change template</A> "
+	interactions += "<A href='byond://?src=\ref[src];changelanguage=1'>Change language ([language])</A> "
+	interactions += "<A href='byond://?src=\ref[src];change_template=1'>Change template</A> "
 	if(template.uses_header)
-		interactions += "<A href='?src=\ref[src];toggleheader=1'>Toggle header</A> "
-		interactions += "<A href='?src=\ref[src];changeheader=1'>Change header</A> "
+		interactions += "<A href='byond://?src=\ref[src];toggleheader=1'>Toggle header</A> "
+		interactions += "<A href='byond://?src=\ref[src];changeheader=1'>Change header</A> "
 	if(template.uses_footer)
-		interactions += "<A href='?src=\ref[src];togglefooter=1'>Toggle footer</A> "
-		interactions += "<A href='?src=\ref[src];changefooter=1'>Change footer</A> "
-	interactions += "<A href='?src=\ref[src];codex=1'>Pencode guide</A> "
-	interactions += "<A href='?src=\ref[src];clear=1'>Clear page</A> "
+		interactions += "<A href='byond://?src=\ref[src];togglefooter=1'>Toggle footer</A> "
+		interactions += "<A href='byond://?src=\ref[src];changefooter=1'>Change footer</A> "
+	interactions += "<A href='byond://?src=\ref[src];codex=1'>Pencode guide</A> "
+	interactions += "<A href='byond://?src=\ref[src];clear=1'>Clear page</A> "
 	interactions += "</center>"
 
 /obj/item/paper/admin/proc/adminbrowse()

@@ -268,7 +268,7 @@
 					else
 						dat += "<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]"
 
-		dat += "<HR><A href='?src=\ref[src];action=cook'>Turn on!</a><br><A href='?src=\ref[src];action=dispose'>Eject ingredients!</a>"
+		dat += "<HR><A href='byond://?src=\ref[src];action=cook'>Turn on!</a><br><A href='byond://?src=\ref[src];action=dispose'>Eject ingredients!</a>"
 
 	var/datum/browser/popup = new(user, "microwave", "Microwave Controls")
 	popup.set_content(dat)

@@ -9,7 +9,7 @@ GLOBAL_DATUM_INIT(traitors, /datum/antagonist/traitor, new)
 	skill_setter = /datum/antag_skill_setter/station
 
 /datum/antagonist/traitor/get_extra_panel_options(datum/mind/player)
-	return "<a href='?src=\ref[player];common=crystals'>\[set crystals\]</a><a href='?src=\ref[src];spawn_uplink=\ref[player.current]'>\[spawn uplink\]</a>"
+	return "<a href='byond://?src=\ref[player];common=crystals'>\[set crystals\]</a><a href='byond://?src=\ref[src];spawn_uplink=\ref[player.current]'>\[spawn uplink\]</a>"
 
 /datum/antagonist/traitor/Topic(href, href_list)
 	if (..())

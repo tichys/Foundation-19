@@ -56,8 +56,8 @@
 	. = list()
 	for(var/token in tokens)
 		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
-		var/title = "<a href='?src=\ref[src];expand_options_[token]=1'>[tokens[token]]</a><b>- </b>[pref.cultural_info[token]]"
-		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
+		var/title = "<a href='byond://?src=\ref[src];expand_options_[token]=1'>[tokens[token]]</a><b>- </b>[pref.cultural_info[token]]"
+		var/append_text = "<a href='byond://?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
 		. += culture.get_description(title, append_text, verbose = !hidden[token])
 		if (expanded[token])
 			var/list/valid_values
@@ -74,7 +74,7 @@
 				if (pref.cultural_info[token] == V)
 					. += "<span class='linkOn'>[V]</span> "
 				else
-					. += "<a href='?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[V]</a> "
+					. += "<a href='byond://?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[V]</a> "
 			. += "</table>"
 		. += "<hr>"
 	. = jointext(.,null)

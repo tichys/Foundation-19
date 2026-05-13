@@ -45,13 +45,13 @@
 /datum/category_item/player_setup_item/physical/basic/content()
 	. = list()
 	. += "<b>Name:</b> "
-	. += "<a href='?src=\ref[src];rename=1'><b>[pref.real_name]</b></a><br>"
-	. += "<a href='?src=\ref[src];random_name=1'>Randomize Name</A><br>"
-	. += "<a href='?src=\ref[src];always_random_name=1'>Always Random Name: [pref.be_random_name ? "Yes" : "No"]</a>"
+	. += "<a href='byond://?src=\ref[src];rename=1'><b>[pref.real_name]</b></a><br>"
+	. += "<a href='byond://?src=\ref[src];random_name=1'>Randomize Name</A><br>"
+	. += "<a href='byond://?src=\ref[src];always_random_name=1'>Always Random Name: [pref.be_random_name ? "Yes" : "No"]</a>"
 	. += "<hr>"
-	. += "<b>Gender:</b> <a href='?src=\ref[src];gender=1'><b>[gender2text(pref.gender)]</b></a><br>"
-	. += "<b>Age:</b> <a href='?src=\ref[src];age=1'>[pref.age]</a><br>"
-	. += "<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a>"
+	. += "<b>Gender:</b> <a href='byond://?src=\ref[src];gender=1'><b>[gender2text(pref.gender)]</b></a><br>"
+	. += "<b>Age:</b> <a href='byond://?src=\ref[src];age=1'>[pref.age]</a><br>"
+	. += "<b>Spawn Point</b>: <a href='byond://?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(href,list/href_list, mob/user)

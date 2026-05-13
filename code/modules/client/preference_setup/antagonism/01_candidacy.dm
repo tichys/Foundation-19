@@ -32,9 +32,9 @@
 		if(jobban_isbanned(preference_mob(), antag.id) || (antag.id == MODE_MALFUNCTION && jobban_isbanned(preference_mob(), "AIC")))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
 		else if(antag.id in pref.be_special_role)
-			. += "<span class='linkOn'>Yes</span> <a href='?src=\ref[src];del_special=[antag.id]'>No</a></br>"
+			. += "<span class='linkOn'>Yes</span> <a href='byond://?src=\ref[src];del_special=[antag.id]'>No</a></br>"
 		else
-			. += "<a href='?src=\ref[src];add_special=[antag.id]'>Yes</a> <span class='linkOn'>No</span></br>"
+			. += "<a href='byond://?src=\ref[src];add_special=[antag.id]'>Yes</a> <span class='linkOn'>No</span></br>"
 
 		. += "</td></tr>"
 	. += "</table>"
@@ -53,12 +53,12 @@
 			var/datum/species/S = new ghost_trap.species_whitelist()
 			. += "[SPAN_DANGER("\[WHITELIST RESTRICTED - [S]\]")]<br />"
 		else if(ghost_trap.pref_check in pref.be_special_role)
-			. += "<span class='linkOn'>Yes</span> <a href='?src=\ref[src];del_special=[ghost_trap.pref_check]'>No</a></br>"
+			. += "<span class='linkOn'>Yes</span> <a href='byond://?src=\ref[src];del_special=[ghost_trap.pref_check]'>No</a></br>"
 		else
-			. += "<a href='?src=\ref[src];add_special=[ghost_trap.pref_check]'>Yes</a> <span class='linkOn'>No</span></br>"
+			. += "<a href='byond://?src=\ref[src];add_special=[ghost_trap.pref_check]'>Yes</a> <span class='linkOn'>No</span></br>"
 
 		. += "</td></tr>"
-	. += "<font size = 1.5><b><tr><td>Select All: </td><td></b></font><a href='?src=\ref[src];select_all=1'>Yes</a> <a href='?src=\ref[src];select_all=0'>No</a></td></tr>"
+	. += "<font size = 1.5><b><tr><td>Select All: </td><td></b></font><a href='byond://?src=\ref[src];select_all=1'>Yes</a> <a href='byond://?src=\ref[src];select_all=0'>No</a></td></tr>"
 	. += "</table>"
 	. = jointext(.,null)
 

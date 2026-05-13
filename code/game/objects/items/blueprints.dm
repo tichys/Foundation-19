@@ -59,14 +59,14 @@
 	switch (get_area_type(A))
 		if (AREA_SPACE)
 			dat += "According \the [src], you are now <b>outside the facility</b>."
-			dat += "<a href='?src=\ref[src];action=create_area'>Mark this place as new area.</a>"
+			dat += "<a href='byond://?src=\ref[src];action=create_area'>Mark this place as new area.</a>"
 		if (AREA_STATION)
 			dat += "According \the [src], you are now in <b>\"[A.name]\"</b>."
-			dat += "You may <a href='?src=\ref[src];action=edit_area'> move an amendment</a> to the drawing."
+			dat += "You may <a href='byond://?src=\ref[src];action=edit_area'> move an amendment</a> to the drawing."
 			if (A.apc)
 				dat += "You can't erase this area, because it has an APC.</p>"
 			else
-				dat += "You <a href='?src=\ref[src];action=delete_area'>erase a part of it</a>.</p>"
+				dat += "You <a href='byond://?src=\ref[src];action=delete_area'>erase a part of it</a>.</p>"
 		else
 			dat += "This place isn't noted on \the [src]."
 	var/datum/browser/popup = new(usr, "blueprints", name, 290, 300)

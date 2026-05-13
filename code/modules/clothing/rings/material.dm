@@ -38,7 +38,7 @@
 
 /obj/item/clothing/ring/material/get_examine_line(mob/user)
 	. = ..()
-	. += " <a href='?src=\ref[src];examine=1'>\[View\]</a>"
+	. += " <a href='byond://?src=\ref[src];examine=1'>\[View\]</a>"
 
 /obj/item/clothing/ring/material/get_material()
 	return material

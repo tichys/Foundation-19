@@ -37,7 +37,7 @@
 			var/mob/M = monster[i]
 			var/name = capitalize(initial(M.name))
 			dat += "<BR><a href='byond://?src=\ref[src];path=\ref[monster[i]]'>[name]</a> - [monster_info[i]]</BR>"
-	user << browse(dat,"window=monstermanual")
+	user << browse(HTML_SKELETON(dat),"window=monstermanual")
 	onclose(user,"monstermanual")
 
 /obj/item/weapon/monster_manual/OnTopic(user, href_list, state)
@@ -73,4 +73,3 @@
 
 	if(. == TOPIC_REFRESH)
 		interact(user)
-

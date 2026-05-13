@@ -37,7 +37,7 @@
 /datum/preferences/proc/announce_conflict(list/notadded)
 	to_chat(client, SPAN_DANGER("KEYBINDING CONFLICT.\n\
 	There are new keybindings that have defaults bound to keys you already set, They will default to Unbound. You can bind them in Setup Character or Game Preferences\n\
-	<a href='?src=\ref[src];preference=tab;tab=3'>Or you can click here to go straight to the keybindings page.</a>"))
+	<a href='byond://?src=\ref[src];preference=tab;tab=3'>Or you can click here to go straight to the keybindings page.</a>"))
 	for(var/item in notadded)
 		var/datum/keybinding/conflicted = item
 		to_chat(client, SPAN_DANGER("[conflicted.category]: [conflicted.full_name] needs updating."))
@@ -58,7 +58,7 @@
 	W.write("key_bindings", pref.key_bindings)
 
 /datum/category_item/player_setup_item/controls/keybindings/content(mob/user)
-	return "<center><h2>Keybindings were moved to their own UI. <a href='?src=\ref[src];open_macro_ui=1'>Open it</a></h2></center>"
+	return "<center><h2>Keybindings were moved to their own UI. <a href='byond://?src=\ref[src];open_macro_ui=1'>Open it</a></h2></center>"
 
 /datum/category_item/player_setup_item/controls/keybindings/OnTopic(href, list/href_list, mob/user)
 	if(href_list["open_macro_ui"])

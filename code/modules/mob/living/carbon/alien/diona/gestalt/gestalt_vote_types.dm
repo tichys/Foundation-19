@@ -1,5 +1,5 @@
 /datum/gestalt_vote
-	var/mob/living/carbon/alien/caller
+	var/mob/living/carbon/alien/vote_caller
 	var/list/voted = list()
 	var/descriptor = "a generic motion"
 	var/vote_time = 1 MINUTE
@@ -9,7 +9,7 @@
 
 /datum/gestalt_vote/New(obj/structure/diona_gestalt/_owner, mob/_caller)
 	owner = _owner
-	caller =_caller
+	vote_caller =_caller
 	addtimer(CALLBACK(src, PROC_REF(timed_out)), vote_time)
 
 /datum/gestalt_vote/proc/timed_out()
@@ -40,7 +40,7 @@
 
 /datum/gestalt_vote/Destroy()
 	voted.Cut()
-	caller = null
+	vote_caller = null
 	if(owner)
 		if(owner.current_vote == src)
 			owner.current_vote = null
@@ -56,18 +56,18 @@
 /datum/gestalt_vote/form_change_humanoid/succeeded()
 
 	var/mob/living/carbon/human/diona/humanoid_gestalt = new(get_turf(owner))
-	transfer_languages(caller, humanoid_gestalt)
-	if(caller.mind)
-		caller.mind.transfer_to(humanoid_gestalt)
+	transfer_languages(vote_caller, humanoid_gestalt)
+	if(vote_caller.mind)
+		vote_caller.mind.transfer_to(humanoid_gestalt)
 	else
-		humanoid_gestalt.key = caller.key
+		humanoid_gestalt.key = vote_caller.key
 	owner.visible_message(SPAN_NOTICE("\The [owner] curls in on itself and bunches up, forming a humanoid shape."))
 	for(var/thing in owner.nymphs)
 		var/mob/living/carbon/alien/diona/D = thing
 		D.forceMove(humanoid_gestalt)
-		to_chat(D, SPAN_NOTICE("\The [caller] has shaped the gestalt into a humanoid form."))
+		to_chat(D, SPAN_NOTICE("\The [vote_caller] has shaped the gestalt into a humanoid form."))
 	owner.nymphs.Cut()
-	var/caller_instance_num = caller.instance_num
+	var/caller_instance_num = vote_caller.instance_num
 	spawn
 		var/newname = sanitize(input(humanoid_gestalt, "You have become a humanoid gestalt. Choose a name for yourself.", "Gestalt Name") as null|text, MAX_NAME_LEN)
 		if(!newname)

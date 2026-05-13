@@ -38,8 +38,8 @@
 
 /obj/structure/dispenser/attack_hand(mob/user as mob)
 	var/dat = "[src]<br><br>"
-	dat += "Oxygen tanks: [oxygentanks] - [oxygentanks ? "<A href='?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
-	dat += "Phoron tanks: [phorontanks] - [phorontanks ? "<A href='?src=\ref[src];phoron=1'>Dispense</A>" : "empty"]"
+	dat += "Oxygen tanks: [oxygentanks] - [oxygentanks ? "<A href='byond://?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
+	dat += "Phoron tanks: [phorontanks] - [phorontanks ? "<A href='byond://?src=\ref[src];phoron=1'>Dispense</A>" : "empty"]"
 	var/datum/browser/popup = new(user, "dispenser", "Tank Dispenser")
 	popup.set_content(dat)
 	popup.open()

@@ -7,7 +7,6 @@
 import { map, zipWith } from 'common/collections';
 import { pureComponentHooks } from 'common/react';
 import { Component, createRef } from 'inferno';
-
 import { Box } from './Box';
 
 const normalizeData = (data, scale, rangeX, rangeY) => {
@@ -24,11 +23,12 @@ const normalizeData = (data, scale, rangeX, rangeY) => {
     min[1] = rangeY[0];
     max[1] = rangeY[1];
   }
-  return map((point) => {
+  const normalized = map((point) => {
     return zipWith((value, min, max, scale) => {
       return ((value - min) / (max - min)) * scale;
     })(point, min, max, scale);
   })(data);
+  return normalized;
 };
 
 const dataToPolylinePoints = (data) => {
@@ -101,8 +101,7 @@ class LineChart extends Component {
                 right: 0,
                 bottom: 0,
                 overflow: 'hidden',
-              }}
-            >
+              }}>
               <polyline
                 transform={`scale(1, -1) translate(0, -${viewBox[1]})`}
                 fill={fillColor}

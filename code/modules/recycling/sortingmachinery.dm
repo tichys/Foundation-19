@@ -349,13 +349,13 @@
 
 	dat += "<table style='width:100%; padding:4px;'><tr>"
 	for(var/i = 1, i <= GLOB.tagger_locations.len, i++)
-		dat += "<td><a href='?src=\ref[src];nextTag=[GLOB.tagger_locations[i]]'>[GLOB.tagger_locations[i]]</a></td>"
+		dat += "<td><a href='byond://?src=\ref[src];nextTag=[GLOB.tagger_locations[i]]'>[GLOB.tagger_locations[i]]</a></td>"
 
 		if (i%4==0)
 			dat += "</tr><tr>"
 
 	dat += "</tr></table><br>Current Selection: [currTag ? currTag : "None"]</tt>"
-	dat += "<br><a href='?src=\ref[src];nextTag=CUSTOM'>Enter custom location.</a>"
+	dat += "<br><a href='byond://?src=\ref[src];nextTag=CUSTOM'>Enter custom location.</a>"
 	show_browser(user, dat, "window=destTagScreen;size=450x375")
 	onclose(user, "destTagScreen")
 

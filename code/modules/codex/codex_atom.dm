@@ -13,4 +13,4 @@
 	. = ..()
 	var/datum/codex_entry/entry = SScodex.get_codex_entry(get_codex_value())
 	if(entry && can_see_codex(user))
-		to_chat(user, SPAN_NOTICE("The codex has <b><a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>relevant information</a></b> available."))
+		to_chat(user, SPAN_NOTICE("The codex has <b><a href='byond://?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>relevant information</a></b> available."))

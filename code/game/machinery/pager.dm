@@ -36,7 +36,7 @@
 	if(world.time < last_paged + 5 SECONDS)
 		return
 	last_paged = world.time
-	var/paged = MS.send_to_department(department,"Department page to <b>[location]</b> received. <a href='?src=\ref[src];ack=1'>Take</a>", "*page*")
+	var/paged = MS.send_to_department(department,"Department page to <b>[location]</b> received. <a href='byond://?src=\ref[src];ack=1'>Take</a>", "*page*")
 	acknowledged = 0
 	if(paged)
 		playsound(src, 'sounds/machines/ping.ogg', 60)

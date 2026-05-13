@@ -224,7 +224,7 @@
 
 	if(key)
 		if(include_link && C)
-			. += "<a href='?priv_msg=\ref[C];ticket=\ref[ticket]'>"
+			. += "<a href='byond://?priv_msg=\ref[C];ticket=\ref[ticket]'>"
 
 		. += key
 

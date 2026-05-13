@@ -106,10 +106,10 @@
 		dat += "Loading your savefile failed. Please adminhelp for assistance."
 	else
 		dat += "Slot - "
-		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
-		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
-		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
+		dat += "<a href='byond://?src=\ref[src];load=1'>Load slot</a> - "
+		dat += "<a href='byond://?src=\ref[src];save=1'>Save slot</a> - "
+		dat += "<a href='byond://?src=\ref[src];resetslot=1'>Reset slot</a> - "
+		dat += "<a href='byond://?src=\ref[src];reload=1'>Reload slot</a>"
 
 	dat += "<br>"
 	dat += player_setup.header()
@@ -354,7 +354,7 @@
 		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
 		if(i==default_slot)
 			name = "<b>[name]</b>"
-		dat += "<a href='?src=\ref[src];changeslot=[i];[details?"details=1":""]'>[name]</a><br>"
+		dat += "<a href='byond://?src=\ref[src];changeslot=[i];[details?"details=1":""]'>[name]</a><br>"
 
 	dat += "<hr>"
 	dat += "</center></tt>"

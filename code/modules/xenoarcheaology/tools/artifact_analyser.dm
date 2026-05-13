@@ -41,14 +41,14 @@
 		dat += "<b><font color=red>Unable to locate analysis pad.</font></b><br>"
 	else if(scan_in_progress)
 		dat += "Please wait. Analysis in progress.<br>"
-		dat += "<a href='?src=\ref[src];halt_scan=1'>Halt scanning.</a><br>"
+		dat += "<a href='byond://?src=\ref[src];halt_scan=1'>Halt scanning.</a><br>"
 	else
 		dat += "Scanner is ready.<br>"
-		dat += "<a href='?src=\ref[src];begin_scan=1'>Begin scanning.</a><br>"
+		dat += "<a href='byond://?src=\ref[src];begin_scan=1'>Begin scanning.</a><br>"
 
 	dat += "<br>"
 	dat += "<hr>"
-	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
+	dat += "<a href='byond://?src=\ref[src];close=1'>Close</a>"
 	var/datum/browser/popup = new(user, "artanalyser", "Artifact Analyzer", 450, 500)
 	popup.set_content(dat)
 	popup.open()

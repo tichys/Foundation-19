@@ -1053,15 +1053,15 @@ FIRE ALARM
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		if (A.fire)
-			d1 = text("<A href='?src=\ref[];reset=1'>Reset - Lockdown</A>", src)
+			d1 = text("<A href='byond://?src=\ref[];reset=1'>Reset - Lockdown</A>", src)
 		else
-			d1 = text("<A href='?src=\ref[];alarm=1'>Alarm - Lockdown</A>", src)
+			d1 = text("<A href='byond://?src=\ref[];alarm=1'>Alarm - Lockdown</A>", src)
 		dat = "<HTML><HEAD></HEAD><BODY><TT><B>Fire alarm</B> [d1]\n<HR>The current alert level is <b>[security_state.current_security_level.name]</b>\n</TT></BODY></HTML>"
 	else
 		if (A.fire)
-			d1 = text("<A href='?src=\ref[];reset=1'>[]</A>", src, stars("Reset - Lockdown"))
+			d1 = text("<A href='byond://?src=\ref[];reset=1'>[]</A>", src, stars("Reset - Lockdown"))
 		else
-			d1 = text("<A href='?src=\ref[];alarm=1'>[]</A>", src, stars("Alarm - Lockdown"))
+			d1 = text("<A href='byond://?src=\ref[];alarm=1'>[]</A>", src, stars("Alarm - Lockdown"))
 		dat = "<HTML><HEAD></HEAD><BODY><TT><B>[stars("Fire alarm")]</B> [d1]\n<HR>The current security level is <b>[security_state.current_security_level.name]</b>\n</TT></BODY></HTML>"
 
 	var/datum/browser/popup = new(user, "firealarm", "Fire Alarm")

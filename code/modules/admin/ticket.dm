@@ -157,7 +157,7 @@ var/list/ticket_panels = list()
 				if(owner_client && owner_client.mob)
 					ticket_dat += " - [ADMIN_FULLMONTY_NONAME(owner_client.mob)]"
 					if(ticket.status != TICKET_CLOSED)
-						ticket_dat +=  " - <a href='?_src_=holder;autoresponse=[owner_client.mob]'>Autoresponse</a>"
+						ticket_dat +=  " - <a href='byond://?_src_=holder;autoresponse=\ref[owner_client.mob]'>Autoresponse</a>"
 			if(open_ticket && open_ticket == ticket)
 				ticket_dat += "</i>"
 			ticket_dat += "</li>"

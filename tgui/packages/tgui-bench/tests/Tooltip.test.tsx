@@ -1,11 +1,10 @@
-import { Inferno } from 'inferno';
 import { Box, Tooltip } from 'tgui/components';
 import { createRenderer } from 'tgui/renderer';
 
 const render = createRenderer();
 
 export const ListOfTooltips = () => {
-  const nodes: Inferno.InfernoElement[] = [];
+  const nodes: JSX.Element[] = [];
 
   for (let i = 0; i < 100; i++) {
     nodes.push(
@@ -13,7 +12,7 @@ export const ListOfTooltips = () => {
         <Box as="span" backgroundColor="blue" fontSize="48px" m={1}>
           Tooltip #{i}
         </Box>
-      </Tooltip>,
+      </Tooltip>
     );
   }
 

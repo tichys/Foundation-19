@@ -174,7 +174,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 					continue
 				if(holopadType != HOLOPAD_LONG_RANGE && !AreConnectedZLevels(AI.z, src.z))
 					continue
-				to_chat(AI, SPAN_INFO("Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [holopad_id]</a>."))
+				to_chat(AI, SPAN_INFO("Your presence is requested at <a href='byond://?src=\ref[AI];jumptoholopad=\ref[src]'>\the [holopad_id]</a>."))
 
 		if("Holocomms")
 			if(user.loc != loc)

@@ -1,0 +1,4 @@
+author: Tsurupeta
+delete-after: true
+changes:
+  - rscadd: Adds support for byond version 516

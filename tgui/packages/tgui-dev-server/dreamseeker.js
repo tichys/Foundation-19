@@ -6,7 +6,6 @@
 
 import { exec } from 'child_process';
 import { promisify } from 'util';
-
 import { createLogger } from './logging.js';
 import { require } from './require.js';
 
@@ -30,6 +29,9 @@ export class DreamSeeker {
       .map(key => encodeURIComponent(key)
         + '=' + encodeURIComponent(params[key]))
       .join('&');
+    logger.log(
+      `topic call at ${this.client.defaults.baseURL + '/dummy?' + query}`
+    );
     return this.client.get('/dummy?' + query);
   }
 }

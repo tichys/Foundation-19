@@ -31,7 +31,7 @@
 
 /obj/item/clothing/accessory/badge/get_examine_line(mob/user)
 	. = ..()
-	. += "  <a href='?src=\ref[src];look_at_me=1'>\[View\]</a>"
+	. += "  <a href='byond://?src=\ref[src];look_at_me=1'>\[View\]</a>"
 
 /obj/item/clothing/accessory/badge/examine(user)
 	. = ..()

@@ -6,7 +6,6 @@
 
 import { BooleanLike, classes, pureComponentHooks } from 'common/react';
 import { InfernoNode } from 'inferno';
-
 import { Box, unit } from './Box';
 import { Divider } from './Divider';
 
@@ -25,6 +24,7 @@ type LabeledListItemProps = {
   className?: string | BooleanLike;
   label?: string | InfernoNode | BooleanLike;
   labelColor?: string | BooleanLike;
+  labelWrap?: boolean;
   color?: string | BooleanLike;
   textAlign?: string | BooleanLike;
   buttons?: InfernoNode;
@@ -39,6 +39,7 @@ const LabeledListItem = (props: LabeledListItemProps) => {
     className,
     label,
     labelColor = 'label',
+    labelWrap,
     color,
     textAlign,
     buttons,
@@ -51,9 +52,12 @@ const LabeledListItem = (props: LabeledListItemProps) => {
       <Box
         as="td"
         color={labelColor}
-        className={classes(['LabeledList__cell', 'LabeledList__label'])}
-        verticalAlign={verticalAlign}
-      >
+        className={classes([
+          'LabeledList__cell',
+          // Kinda flipped because we want nowrap as default. Cleaner CSS this way though.
+          !labelWrap && 'LabeledList__label--nowrap',
+        ])}
+        verticalAlign={verticalAlign}>
         {label ? (typeof label === 'string' ? label + ':' : label) : null}
       </Box>
       <Box
@@ -62,8 +66,7 @@ const LabeledListItem = (props: LabeledListItemProps) => {
         textAlign={textAlign}
         className={classes(['LabeledList__cell', 'LabeledList__content'])}
         colSpan={buttons ? undefined : 2}
-        verticalAlign={verticalAlign}
-      >
+        verticalAlign={verticalAlign}>
         {content}
         {children}
       </Box>
@@ -89,8 +92,7 @@ const LabeledListDivider = (props: LabeledListDividerProps) => {
         style={{
           'padding-top': padding,
           'padding-bottom': padding,
-        }}
-      >
+        }}>
         <Divider />
       </td>
     </tr>

@@ -200,7 +200,7 @@
 	var/level = min + (pref.skills_allocated[job] ? pref.skills_allocated[job][S] : 0)				//the current skill level
 	var/cap = pref.get_max_affordable(job, S) //if selecting the skill would make you overspend, it won't be shown
 	dat += "<tr style='text-align:left;'>"
-	dat += "<th><a href='?src=\ref[src];skillinfo=\ref[S]'>[S.name] ([pref.get_spent_points(job, S)])</a></th>"
+	dat += "<th><a href='byond://?src=\ref[src];skillinfo=\ref[S]'>[S.name] ([pref.get_spent_points(job, S)])</a></th>"
 	for(var/i = SKILL_MIN, i <= SKILL_MAX, i++)
 		dat += skill_to_button(S, job, level, i, min, cap)
 	dat += "</tr>"
@@ -232,5 +232,5 @@
 
 /datum/category_item/player_setup_item/occupation/proc/add_link(decl/hierarchy/skill/skill, datum/job/job, text, style, value)
 	if(pref.check_skill_prerequisites(job, skill))
-		return "<a class=[style] href='?src=\ref[src];hit_skill_button=\ref[skill];at_job=\ref[job];newvalue=[value]'>[text]</a>"
+		return "<a class=[style] href='byond://?src=\ref[src];hit_skill_button=\ref[skill];at_job=\ref[job];newvalue=[value]'>[text]</a>"
 	return text

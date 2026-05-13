@@ -100,13 +100,13 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 				playsound(Console.loc, 'sounds/machines/chime.ogg', 80, 1)
 				show_sound_effect(Console.loc, soundicon = SFX_ICON_SMALL)
 				Console.audible_message("[icon2html(Console, viewers(get_turf(Console)))]<span class='warning'>\The [Console] announces: 'High priority message received from [sender]!'</span>", hearing_distance = 8)
-				Console.message_log += "<FONT color='red'>High Priority message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></FONT><BR>[authmsg]"
+				Console.message_log += "<FONT color='red'>High Priority message from <A href='byond://?src=\ref[Console];write=[sender]'>[sender]</A></FONT><BR>[authmsg]"
 			else
 				if(!Console.silent)
 					playsound(Console.loc, 'sounds/machines/twobeep.ogg', 50, 1)
 					show_sound_effect(Console.loc, soundicon = SFX_ICON_SMALL)
 					Console.audible_message("[icon2html(Console, viewers(get_turf(Console)))]<span class='notice'>\The [Console] announces: 'Message received from [sender].'</span>", hearing_distance = 5)
-				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
+				Console.message_log += "<B>Message from <A href='byond://?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
 			Console.set_light(0.3, 0.1, 2)
 
 

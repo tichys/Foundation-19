@@ -83,7 +83,7 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 	if (linear)
 		back_to_param += ";viewruntime_linear=1"
 
-	return "<a href='?src=\ref[src];viewruntime=\ref[src][back_to_param]'>[linktext]</a>"
+	return "<a href='byond://?src=\ref[src];viewruntime=\ref[src][back_to_param]'>[linktext]</a>"
 
 /datum/error_viewer/error_cache
 	var/list/errors = list()

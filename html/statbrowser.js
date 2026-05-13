@@ -18,7 +18,8 @@ if (!String.prototype.trim) {
 var status_tab_parts = ["Loading..."];
 var current_tab = null;
 var mc_tab_parts = [["Loading...", ""]];
-var borg_subsystems = [["Loading...", ""]];
+var spells = [];
+var spell_tabs = [];
 var verb_tabs = [];
 var verbs = [["", ""]]; // list with a list inside
 var tickets = [];
@@ -27,9 +28,12 @@ var sdql2 = [];
 var permanent_tabs = []; // tabs that won't be cleared by wipes
 var turfcontents = [];
 var turfname = "";
+var imageRetryDelay = 500;
+var imageRetryLimit = 50;
 var menu = document.getElementById("menu");
 var under_menu = document.getElementById("under_menu");
 var statcontentdiv = document.getElementById("statcontent");
+var storedimages = [];
 var split_admin_tabs = false;
 
 // Any BYOND commands that could result in the client's focus changing go through this
@@ -139,6 +143,11 @@ function remove_verb(v) {
 
 function check_verbs() {
 	for (var v = verb_tabs.length - 1; v >= 0; v--) {
+		//Aurora snowflake check because somehow they manage to break even ports
+		if (!verb_tabs[v]) {
+			v--;
+			continue;
+		}
 		verbs_cat_check(verb_tabs[v]);
 	}
 }
@@ -152,7 +161,7 @@ function verbs_cat_check(cat) {
 	}
 	var verbs_in_cat = 0;
 	var verbcat = "";
-	if (!verb_tabs.includes(tabCat)) {
+	if (!verb_tabs.includes(tabCat) && !spell_tabs.includes(tabCat)) {
 		removeStatusTab(tabCat);
 		return;
 	}
@@ -171,7 +180,21 @@ function verbs_cat_check(cat) {
 			break; // we only need one
 		}
 	}
-	if (verbs_in_cat != 1) {
+	//More aurora snowflake code to handle spell tabs
+	var spells_in_cat = 0;
+	var spellcat = "";
+	for (var v = spells.length - 1; v >= 0; v--) {
+		var spell = spells[v];
+		spellcat = spell[0];
+		if (spellcat != tabCat || spellcat.trim() == "") {
+			continue;
+		} else {
+			spells_in_cat = 1;
+			break;
+		}
+	}
+
+	if (verbs_in_cat != 1 && spells_in_cat != 1) {
 		removeStatusTab(tabCat);
 		if (current_tab == tabCat) tab_change("Status");
 	}
@@ -211,6 +234,21 @@ function TakeTabFromByond(tab) {
 	Byond.sendMessage("Remove-Tabs", { tab: tab });
 }
 
+function spell_cat_check(cat) {
+	var spells_in_cat = 0;
+	var spellcat = "";
+	for (var s = 0; s < spells.length; s++) {
+		var spell = spells[s];
+		spellcat = spell[0];
+		if (spellcat == cat) {
+			spells_in_cat++;
+		}
+	}
+	if (spells_in_cat < 1) {
+		removeStatusTab(cat);
+	}
+}
+
 function tab_change(tab) {
 	if (tab == current_tab) return;
 	if (document.getElementById(current_tab))
@@ -219,19 +257,22 @@ function tab_change(tab) {
 	set_byond_tab(tab);
 	if (document.getElementById(tab))
 		document.getElementById(tab).className = "button active"; // make current button active
+	var spell_tabs_thingy = spell_tabs.includes(tab);
 	var verb_tabs_thingy = verb_tabs.includes(tab);
 	if (tab == "Status") {
 		draw_status();
 	} else if (tab == "MC") {
 		draw_mc();
+	} else if (spell_tabs_thingy) {
+		draw_spells(tab);
 	} else if (verb_tabs_thingy) {
 		draw_verbs(tab);
 	} else if (tab == "Debug Stat Panel") {
 		draw_debug();
+	} else if (tab == "SDQL2") {
+		draw_sdql2();
 	} else if (tab == turfname) {
 		draw_listedturf();
-	} else if (tab == "Subsystems") {
-		draw_borg_subsystems();
 	} else {
 		statcontentdiv.textContext = "Loading...";
 	}
@@ -352,7 +393,7 @@ function draw_mc() {
 		var td2 = document.createElement("td");
 		if (part[2]) {
 			var a = document.createElement("a");
-			a.href = "?_src_=vars;Vars=" + part[2];
+			a.href = "byond://?_src_=vars;Vars=" + part[2];
 			a.textContent = part[1];
 			td2.appendChild(a);
 		} else {
@@ -364,7 +405,6 @@ function draw_mc() {
 	}
 	document.getElementById("statcontent").appendChild(table);
 }
-
 function remove_sdql2() {
 	if (sdql2) {
 		sdql2 = [];
@@ -373,12 +413,22 @@ function remove_sdql2() {
 	}
 	checkStatusTab();
 }
-
-function remove_interviews() {
-	if (tickets) {
-		tickets = [];
+function iconError(e) {
+	if (current_tab != turfname) {
+		return;
 	}
-	checkStatusTab();
+	setTimeout(function () {
+		var node = e.target;
+		var current_attempts = Number(node.getAttribute("data-attempts")) || 0;
+		if (current_attempts > imageRetryLimit) {
+			return;
+		}
+		var src = node.src;
+		node.src = null;
+		node.src = src + "#" + current_attempts;
+		node.setAttribute("data-attempts", current_attempts + 1);
+		draw_listedturf();
+	}, imageRetryDelay);
 }
 
 function draw_listedturf() {
@@ -386,6 +436,20 @@ function draw_listedturf() {
 	var table = document.createElement("table");
 	for (var i = 0; i < turfcontents.length; i++) {
 		var part = turfcontents[i];
+		if (storedimages[part[1]] == null && part[2]) {
+			var img = document.createElement("img");
+			img.src = part[2];
+			img.id = part[1];
+			storedimages[part[1]] = part[2];
+			img.onerror = iconError;
+			table.appendChild(img);
+		} else {
+			var img = document.createElement("img");
+			img.onerror = iconError;
+			img.src = storedimages[part[1]];
+			img.id = part[1];
+			table.appendChild(img);
+		}
 		var b = document.createElement("div");
 		var clickcatcher = "";
 		b.className = "link";
@@ -433,7 +497,7 @@ function remove_listedturf() {
 }
 
 function remove_mc() {
-	removeStatusTab("MC");
+	removePermanentTab("MC");
 	if (current_tab == "MC") {
 		tab_change("Status");
 	}
@@ -450,11 +514,125 @@ function draw_sdql2() {
 		var td2 = document.createElement("td");
 		if (part[2]) {
 			var a = document.createElement("a");
-			a.href = "?src=" + part[2] + ";statpanel_item_click=left";
+			a.href = "byond://?src=" + part[2] + ";statpanel_item_click=left";
 			a.textContent = part[1];
 			td2.appendChild(a);
 		} else {
 			td2.textContent = part[1];
+		}
+		tr.appendChild(td1);
+		tr.appendChild(td2);
+		table.appendChild(tr);
+	}
+	document.getElementById("statcontent").appendChild(table);
+}
+
+function draw_tickets() {
+	statcontentdiv.textContent = "";
+	var table = document.createElement("table");
+	if (!tickets) {
+		return;
+	}
+	for (var i = 0; i < tickets.length; i++) {
+		var part = tickets[i];
+		var tr = document.createElement("tr");
+		var td1 = document.createElement("td");
+		td1.textContent = part[0];
+		var td2 = document.createElement("td");
+		if (part[2]) {
+			var a = document.createElement("a");
+			a.href =
+				"byond://?_src_=holder;ahelp=" +
+				part[2] +
+				";ahelp_action=ticket;statpanel_item_click=left;action=ticket";
+			a.textContent = part[1];
+			td2.appendChild(a);
+		} else if (part[3]) {
+			var a = document.createElement("a");
+			a.href = "byond://?src=" + part[3] + ";statpanel_item_click=left";
+			a.textContent = part[1];
+			td2.appendChild(a);
+		} else {
+			td2.textContent = part[1];
+		}
+		tr.appendChild(td1);
+		tr.appendChild(td2);
+		table.appendChild(tr);
+	}
+	document.getElementById("statcontent").appendChild(table);
+}
+
+function draw_interviews() {
+	var body = document.createElement("div");
+	var header = document.createElement("h3");
+	header.textContent = "Interviews";
+	body.appendChild(header);
+	var manDiv = document.createElement("div");
+	manDiv.className = "interview_panel_controls";
+	var manLink = document.createElement("a");
+	manLink.textContent = "Open Interview Manager Panel";
+	manLink.href =
+		"byond://?_src_=holder;interview_man=1;statpanel_item_click=left";
+	manDiv.appendChild(manLink);
+	body.appendChild(manDiv);
+
+	// List interview stats
+	var statsDiv = document.createElement("table");
+	statsDiv.className = "interview_panel_stats";
+	for (var key in interviewManager.status) {
+		var d = document.createElement("div");
+		var tr = document.createElement("tr");
+		var stat_name = document.createElement("td");
+		var stat_text = document.createElement("td");
+		stat_name.textContent = key;
+		stat_text.textContent = interviewManager.status[key];
+		tr.appendChild(stat_name);
+		tr.appendChild(stat_text);
+		statsDiv.appendChild(tr);
+	}
+	body.appendChild(statsDiv);
+	document.getElementById("statcontent").appendChild(body);
+
+	// List interviews if any are open
+	var table = document.createElement("table");
+	table.className = "interview_panel_table";
+	if (!interviewManager) {
+		return;
+	}
+	for (var i = 0; i < interviewManager.interviews.length; i++) {
+		var part = interviewManager.interviews[i];
+		var tr = document.createElement("tr");
+		var td = document.createElement("td");
+		var a = document.createElement("a");
+		a.textContent = part["status"];
+		a.href =
+			"byond://?_src_=holder;interview=" +
+			part["ref"] +
+			";statpanel_item_click=left";
+		td.appendChild(a);
+		tr.appendChild(td);
+		table.appendChild(tr);
+	}
+	document.getElementById("statcontent").appendChild(table);
+}
+
+function draw_spells(cat) {
+	statcontentdiv.textContent = "";
+	var table = document.createElement("table");
+	for (var i = 0; i < spells.length; i++) {
+		var part = spells[i];
+		if (part[0] != cat) continue;
+		var tr = document.createElement("tr");
+		var td1 = document.createElement("td");
+		td1.textContent = part[1];
+		var td2 = document.createElement("td");
+		if (part[3]) {
+			var a = document.createElement("a");
+			a.href = "byond://?src=" + part[3] + ";statpanel_item_click=left";
+			a.textContent = part[2];
+			td2.appendChild(a);
+		} else {
+			td2.textContent = part[2];
 		}
 		tr.appendChild(td1);
 		tr.appendChild(td2);
@@ -534,9 +712,11 @@ function draw_verbs(cat) {
 function set_theme(which) {
 	if (which == "light") {
 		document.body.className = "";
+		document.documentElement.className = "light";
 		set_style_sheet("browserOutput_white");
 	} else if (which == "dark") {
 		document.body.className = "dark";
+		document.documentElement.className = "dark";
 		set_style_sheet("browserOutput");
 	}
 }
@@ -603,6 +783,17 @@ function add_verb_list(payload) {
 	}
 }
 
+function init_spells() {
+	var cat = "";
+	for (var i = 0; i < spell_tabs.length; i++) {
+		cat = spell_tabs[i];
+		if (cat.length > 0) {
+			verb_tabs.push(cat);
+			createStatusTab(cat);
+		}
+	}
+}
+
 document.addEventListener("mouseup", restoreFocus);
 document.addEventListener("keyup", restoreFocus);
 
@@ -614,6 +805,23 @@ if (!current_tab) {
 window.onload = function () {
 	Byond.sendMessage("Update-Verbs");
 };
+
+Byond.subscribeTo("update_spells", function (payload) {
+	spell_tabs = payload.spell_tabs;
+	var do_update = false;
+	if (spell_tabs.includes(current_tab)) {
+		do_update = true;
+	}
+	init_spells();
+	if (payload.actions) {
+		spells = payload.actions;
+		if (do_update) {
+			draw_spells(current_tab);
+		}
+	} else {
+		remove_spells();
+	}
+});
 
 Byond.subscribeTo("remove_verb_list", function (v) {
 	var to_remove = v;
@@ -685,6 +893,29 @@ Byond.subscribeTo("update_mc", function (payload) {
 	}
 });
 
+Byond.subscribeTo("remove_spells", function () {
+	for (var s = 0; s < spell_tabs.length; s++) {
+		removeStatusTab(spell_tabs[s]);
+	}
+});
+
+Byond.subscribeTo("init_spells", function () {
+	var cat = "";
+	for (var i = 0; i < spell_tabs.length; i++) {
+		cat = spell_tabs[i];
+		if (cat.length > 0) {
+			verb_tabs.push(cat);
+			createStatusTab(cat);
+		}
+	}
+});
+
+Byond.subscribeTo("check_spells", function () {
+	for (var v = 0; v < spell_tabs.length; v++) {
+		spell_cat_check(spell_tabs[v]);
+	}
+});
+
 Byond.subscribeTo("create_debug", function () {
 	if (!document.getElementById("Debug Stat Panel")) {
 		addPermanentTab("Debug Stat Panel");
@@ -702,9 +933,7 @@ Byond.subscribeTo("create_listedturf", function (TN) {
 
 Byond.subscribeTo("remove_admin_tabs", function () {
 	remove_mc();
-	remove_tickets();
 	remove_sdql2();
-	remove_interviews();
 });
 
 Byond.subscribeTo("update_listedturf", function (TC) {
@@ -712,10 +941,6 @@ Byond.subscribeTo("update_listedturf", function (TC) {
 	if (current_tab == turfname) {
 		draw_listedturf();
 	}
-});
-
-Byond.subscribeTo("update_interviews", function (I) {
-	interviewManager = I;
 });
 
 Byond.subscribeTo("update_split_admin_tabs", function (status) {
@@ -732,7 +957,7 @@ Byond.subscribeTo("update_split_admin_tabs", function (status) {
 	split_admin_tabs = status;
 });
 
-Byond.subscribeTo("add_admin_tabs", function (ht) {
+Byond.subscribeTo("add_admin_tabs", function () {
 	addPermanentTab("MC");
 });
 
@@ -746,7 +971,6 @@ Byond.subscribeTo("update_sdql2", function (S) {
 		draw_sdql2();
 	}
 });
-
 Byond.subscribeTo("remove_listedturf", remove_listedturf);
 
 Byond.subscribeTo("remove_sdql2", remove_sdql2);
@@ -754,78 +978,3 @@ Byond.subscribeTo("remove_sdql2", remove_sdql2);
 Byond.subscribeTo("remove_mc", remove_mc);
 
 Byond.subscribeTo("add_verb_list", add_verb_list);
-
-Byond.subscribeTo("add_borg_subsystems", function () {
-	if (!verb_tabs.includes("Subsystems")) {
-		verb_tabs.push("Subsystems");
-	}
-
-	addPermanentTab("Subsystems");
-});
-
-Byond.subscribeTo("update_borg_subsystems", function (new_borg_subsystems) {
-	borg_subsystems = new_borg_subsystems;
-
-	if (!verb_tabs.includes("Subsystems")) {
-		verb_tabs.push("Subsystems");
-	}
-
-	addPermanentTab("Subsystems");
-
-	if (current_tab == "Subsystems") {
-		draw_borg_subsystems();
-	}
-});
-
-function draw_borg_subsystems() {
-	statcontentdiv.textContent = "";
-	var table = document.createElement("table");
-	for (var i = 0; i < borg_subsystems.length; i++) {
-		var part = borg_subsystems[i];
-		var tr = document.createElement("tr");
-		var td1 = document.createElement("td");
-		var a = document.createElement("div");
-		var clickcatcher = "";
-		a.className = "link";
-		a.onmousedown = (function (part) {
-			// The outer function is used to close over a fresh "part" variable,
-			// rather than every onmousedown getting the "part" of the last entry.
-			return function (e) {
-				e.preventDefault();
-				clickcatcher = "?src=" + part[1];
-				switch (e.button) {
-					case 1:
-						clickcatcher += ";statpanel_item_click=middle";
-						break;
-					case 2:
-						clickcatcher += ";statpanel_item_click=right";
-						break;
-					default:
-						clickcatcher += ";statpanel_item_click=left";
-				}
-				if (e.shiftKey) {
-					clickcatcher += ";statpanel_item_shiftclick=1";
-				}
-				if (e.ctrlKey) {
-					clickcatcher += ";statpanel_item_ctrlclick=1";
-				}
-				if (e.altKey) {
-					clickcatcher += ";statpanel_item_altclick=1";
-				}
-				window.location.href = clickcatcher;
-			};
-		})(part);
-		a.textContent = part[0];
-		td1.appendChild(a);
-		tr.appendChild(td1);
-		table.appendChild(tr);
-	}
-	document.getElementById("statcontent").appendChild(table);
-}
-
-Byond.subscribeTo("remove_borg_subsystems", function () {
-	removePermanentTab("Subsystems");
-	if (current_tab == "Subsystems") {
-		tab_change("Status");
-	}
-});

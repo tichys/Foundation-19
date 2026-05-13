@@ -51,7 +51,7 @@
 					</td>
 					<td width='50%'>
 						<div align='center'>
-							<a href='?_src_=vars;datumrefresh=\ref[D]'>Refresh</a>
+							<a href='byond://?_src_=vars;datumrefresh=\ref[D]'>Refresh</a>
 							[A ? "[ADMIN_JMP(A)]":""]
 							<form>
 								<select name='file'
@@ -131,7 +131,7 @@
 		dat += "<h1>[make_view_variables_value(D)]</h1>"
 		for(var/v in user.client.watched_variables[D])
 			dat += "<div class='var'>"
-			dat += "(<a href='?_src_=vars;datumunwatch=\ref[D];varnameunwatch=[v]'>X</a>) "
+			dat += "(<a href='byond://?_src_=vars;datumunwatch=\ref[D];varnameunwatch=[v]'>X</a>) "
 			dat += "[D.make_view_variables_variable_entry(v, D.get_variable_value(v), 1)] [v] = [make_view_variables_value(D.get_variable_value(v), v)]"
 			dat += "</div>"
 

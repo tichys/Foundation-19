@@ -8,18 +8,12 @@ import { classes } from 'common/react';
 import { useDispatch } from 'common/redux';
 import { decodeHtmlEntities, toTitleCase } from 'common/string';
 import { Component } from 'inferno';
-
 import { backendSuspendStart, useBackend } from '../backend';
 import { Icon } from '../components';
 import { UI_DISABLED, UI_INTERACTIVE, UI_UPDATE } from '../constants';
 import { useDebug } from '../debug';
 import { toggleKitchenSink } from '../debug/actions';
-import {
-  dragStartHandler,
-  recallWindowGeometry,
-  resizeStartHandler,
-  setWindowKey,
-} from '../drag';
+import { dragStartHandler, recallWindowGeometry, resizeStartHandler, setWindowKey } from '../drag';
 import { createLogger } from '../logging';
 import { Layout } from './Layout';
 
@@ -92,13 +86,11 @@ export class Window extends Component {
             logger.log('pressed close');
             dispatch(backendSuspendStart());
           }}
-          canClose={canClose}
-        >
+          canClose={canClose}>
           {buttons}
         </TitleBar>
         <div
-          className={classes(['Window__rest', debugLayout && 'debug-layout'])}
-        >
+          className={classes(['Window__rest', debugLayout && 'debug-layout'])}>
           {!suspended && children}
           {showDimmer && <div className="Window__dimmer" />}
         </div>
@@ -128,8 +120,7 @@ const WindowContent = (props) => {
   return (
     <Layout.Content
       className={classes(['Window__content', className])}
-      {...rest}
-    >
+      {...rest}>
       {(fitted && children) || (
         <div className="Window__contentPadding">{children}</div>
       )}
@@ -192,8 +183,7 @@ const TitleBar = (props, context) => {
       {process.env.NODE_ENV !== 'production' && (
         <div
           className="TitleBar__devBuildIndicator"
-          onClick={() => dispatch(toggleKitchenSink())}
-        >
+          onClick={() => dispatch(toggleKitchenSink())}>
           <Icon name="bug" />
         </div>
       )}
@@ -203,8 +193,7 @@ const TitleBar = (props, context) => {
           // IE8: Synthetic onClick event doesn't work on IE8.
           // IE8: Use a plain character instead of a unicode symbol.
           // eslint-disable-next-line react/no-unknown-property
-          onclick={onClose}
-        >
+          onclick={onClose}>
           {Byond.IS_LTE_IE8 ? 'x' : '×'}
         </div>
       )}

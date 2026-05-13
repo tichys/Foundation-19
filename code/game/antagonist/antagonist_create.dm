@@ -69,7 +69,7 @@
 	if (codex_key)
 		var/datum/codex_entry/entry = SScodex.get_codex_entry(codex_key)
 		if(entry && entry.entry_text)
-			to_chat(player.current, SPAN_BOLD("The codex has <i><a href='?src=\ref[SScodex];show_examined_info=\ref[entry];show_to=\ref[player.current]'>more information</a></i> about this antagonist."))
+			to_chat(player.current, SPAN_BOLD("The codex has <i><a href='byond://?src=\ref[SScodex];show_examined_info=\ref[entry];show_to=\ref[player.current]'>more information</a></i> about this antagonist."))
 
 	return 1
 

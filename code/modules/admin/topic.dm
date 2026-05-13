@@ -655,8 +655,8 @@
 			return alert(usr, "The game has already started.", null, null, null, null)
 		var/dat = {"<B>What mode do you wish to play?</B><HR>"}
 		for(var/mode in config.modes)
-			dat += {"<A href='?src=\ref[src];c_mode2=[mode]'>[config.mode_names[mode]]</A><br>"}
-		dat += {"<A href='?src=\ref[src];c_mode2=secret'>Secret</A><br>"}
+			dat += {"<A href='byond://?src=\ref[src];c_mode2=[mode]'>[config.mode_names[mode]]</A><br>"}
+		dat += {"<A href='byond://?src=\ref[src];c_mode2=secret'>Secret</A><br>"}
 		dat += {"Now: [SSticker.master_mode]"}
 		show_browser(usr, dat, "window=c_mode")
 
@@ -669,8 +669,8 @@
 			return alert(usr, "The game mode has to be secret!", null, null, null, null)
 		var/dat = {"<B>What game mode do you want to force secret to be? Use this if you want to change the game mode, but want the players to believe it's secret. This will only work if the current game mode is secret.</B><HR>"}
 		for(var/mode in config.modes)
-			dat += {"<A href='?src=\ref[src];f_secret2=[mode]'>[config.mode_names[mode]]</A><br>"}
-		dat += {"<A href='?src=\ref[src];f_secret2=secret'>Random (default)</A><br>"}
+			dat += {"<A href='byond://?src=\ref[src];f_secret2=[mode]'>[config.mode_names[mode]]</A><br>"}
+		dat += {"<A href='byond://?src=\ref[src];f_secret2=secret'>Random (default)</A><br>"}
 		dat += {"Now: [SSticker.secret_force_mode]"}
 		show_browser(usr, dat, "window=f_secret")
 
@@ -742,7 +742,7 @@
 		if (!M.client)
 			return
 		var/client/C = M.client
-		to_chat(usr, SPAN_NOTICE("Attempting to reload save for [C.key] <A HREF='?src=\ref[src];reloadsaveshow=\ref[C.prefs]'>View Prefs Datum</A>"))
+		to_chat(usr, SPAN_NOTICE("Attempting to reload save for [C.key] <A href='byond://?src=\ref[src];reloadsaveshow=\ref[C.prefs]'>View Prefs Datum</A>"))
 		C.prefs.setup()
 
 	else if (href_list["reloadsaveshow"])
@@ -1868,7 +1868,7 @@
 	return list()
 
 /atom/movable/extra_admin_link(source, prefix, sufix, short_links)
-	return list("<A HREF='?[source];adminplayerobservefollow=\ref[src]'>[prefix][short_links ? "J" : "JMP"][sufix]</A>")
+	return list("<A href='byond://?[source];adminplayerobservefollow=\ref[src]'>[prefix][short_links ? "J" : "JMP"][sufix]</A>")
 
 /client/extra_admin_link(source, prefix, sufix, short_links)
 	return mob ? mob.extra_admin_link(source, prefix, sufix, short_links) : list()
@@ -1876,12 +1876,12 @@
 /mob/extra_admin_link(source, prefix, sufix, short_links)
 	. = ..()
 	if(client && eyeobj)
-		. += "<A HREF='?[source];adminplayerobservefollow=\ref[eyeobj]'>[prefix][short_links ? "E" : "EYE"][sufix]</A>"
+		. += "<A href='byond://?[source];adminplayerobservefollow=\ref[eyeobj]'>[prefix][short_links ? "E" : "EYE"][sufix]</A>"
 
 /mob/observer/ghost/extra_admin_link(source, prefix, sufix, short_links)
 	. = ..()
 	if(mind && (mind.current && !isghost(mind.current)))
-		. += "<A HREF='?[source];adminplayerobservefollow=\ref[mind.current]'>[prefix][short_links ? "B" : "BDY"][sufix]</A>"
+		. += "<A href='byond://?[source];adminplayerobservefollow=\ref[mind.current]'>[prefix][short_links ? "B" : "BDY"][sufix]</A>"
 
 /proc/admin_jump_link(datum/target, source, delimiter = "|", prefix, sufix, short_links)
 	if(!istype(target))

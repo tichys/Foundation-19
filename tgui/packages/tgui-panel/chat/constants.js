@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-export const MAX_VISIBLE_MESSAGES = 2500;
-export const MAX_PERSISTED_MESSAGES = 1000;
 export const MESSAGE_SAVE_INTERVAL = 10000;
 export const MESSAGE_PRUNE_INTERVAL = 60000;
 export const COMBINE_MAX_MESSAGES = 5;
@@ -32,6 +30,7 @@ export const MESSAGE_TYPE_ADMINPM = 'adminpm';
 export const MESSAGE_TYPE_COMBAT = 'combat';
 export const MESSAGE_TYPE_ADMINCHAT = 'adminchat';
 export const MESSAGE_TYPE_MODCHAT = 'modchat';
+export const MESSAGE_TYPE_PRAYER = 'prayer';
 export const MESSAGE_TYPE_EVENTCHAT = 'eventchat';
 export const MESSAGE_TYPE_ADMINLOG = 'adminlog';
 export const MESSAGE_TYPE_ATTACKLOG = 'attacklog';
@@ -59,7 +58,7 @@ export const MESSAGE_TYPES = [
     name: 'Radio',
     description: 'All departments of radio messages',
     selector:
-      '.alert, .minorannounce, .syndradio, .centcomradio, .aiprivradio, .comradio, .gangradio, .engradio, .medradio, .sciradio, .suppradio, .servradio, .radio, .deptradio, .binarysay, .newscaster, .resonate',
+      '.alert, .minorannounce, .syndradio, .centradio, .aiprivradio, .comradio, .entradio, .hailradio, .shipradio, .secradio, .engradio, .medradio, .sciradio, .supradio, .srvradio, .radio, .deptradio, .binarysay, .newscaster, .alien, .changeling, .coalitionradio, .expradio',
   },
   {
     type: MESSAGE_TYPE_INFO,
@@ -120,6 +119,12 @@ export const MESSAGE_TYPES = [
     admin: true,
   },
   {
+    type: MESSAGE_TYPE_PRAYER,
+    name: 'Prayers',
+    description: 'Prayers from players',
+    admin: true,
+  },
+  {
     type: MESSAGE_TYPE_ADMINLOG,
     name: 'Admin Log',
     description: 'ADMIN LOG: Urist McAdmin has jumped to coordinates X, Y, Z',
@@ -136,6 +141,7 @@ export const MESSAGE_TYPES = [
     type: MESSAGE_TYPE_DEBUG,
     name: 'Debug Log',
     description: 'DEBUG: SSPlanets subsystem Recover().',
+    selector: '.debug',
     admin: true,
   },
 ];

@@ -436,7 +436,7 @@ Class Procs:
 	else if((stat & NOPOWER) && !interact_offline)
 		to_chat(user, "It is not receiving power.")
 	if(construct_state && construct_state.mechanics_info())
-		to_chat(user, "It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
+		to_chat(user, "It can be <a href='byond://?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
 	var/list/missing = missing_parts()
 	if(missing)
 		var/list/parts = list()

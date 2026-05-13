@@ -7,7 +7,6 @@
 import { KEY_ENTER, KEY_ESCAPE, KEY_SPACE } from 'common/keycodes';
 import { classes, pureComponentHooks } from 'common/react';
 import { Component, createRef } from 'inferno';
-
 import { createLogger } from '../logging';
 import { Box, computeBoxClassName, computeBoxProps } from './Box';
 import { Icon } from './Icon';
@@ -46,7 +45,7 @@ export const Button = (props) => {
       `Lowercase 'onclick' is not supported on Button and lowercase` +
         ` prop names are discouraged in general. Please use a camelCase` +
         `'onClick' instead and read: ` +
-        `https://infernojs.org/docs/guides/event-handling`,
+        `https://infernojs.org/docs/guides/event-handling`
     );
   }
   rest.onClick = (e) => {
@@ -97,10 +96,10 @@ export const Button = (props) => {
         // Refocus layout on pressing escape.
         if (keyCode === KEY_ESCAPE) {
           e.preventDefault();
+          return;
         }
       }}
-      {...computeBoxProps(rest)}
-    >
+      {...computeBoxProps(rest)}>
       <div className="Button__content">
         {icon && iconPosition !== 'right' && (
           <Icon
@@ -157,14 +156,10 @@ export class ButtonConfirm extends Component {
     this.state = {
       clickedOnce: false,
     };
-    this.handleClick = (event, onClick) => {
-      if (!this.state.clickedOnce) {
-        this.setClickedOnce(true);
-        return;
+    this.handleClick = () => {
+      if (this.state.clickedOnce) {
+        this.setClickedOnce(false);
       }
-
-      onClick(event);
-      this.setClickedOnce(false);
     };
   }
 
@@ -172,11 +167,15 @@ export class ButtonConfirm extends Component {
     this.setState({
       clickedOnce,
     });
+    if (clickedOnce) {
+      setTimeout(() => window.addEventListener('click', this.handleClick));
+    } else {
+      window.removeEventListener('click', this.handleClick);
+    }
   }
 
   render() {
     const {
-      children,
       confirmContent = 'Confirm?',
       confirmColor = 'bad',
       confirmIcon,
@@ -188,13 +187,14 @@ export class ButtonConfirm extends Component {
     } = this.props;
     return (
       <Button
+        content={this.state.clickedOnce ? confirmContent : content}
         icon={this.state.clickedOnce ? confirmIcon : icon}
         color={this.state.clickedOnce ? confirmColor : color}
-        onClick={(e) => this.handleClick(e, onClick)}
+        onClick={() =>
+          this.state.clickedOnce ? onClick() : this.setClickedOnce(true)
+        }
         {...rest}
-      >
-        {this.state.clickedOnce ? confirmContent : children}
-      </Button>
+      />
     );
   }
 }
@@ -265,15 +265,14 @@ export class ButtonInput extends Component {
           'Button--color--' + color,
         ])}
         {...rest}
-        onClick={() => this.setInInput(true)}
-      >
+        onClick={() => this.setInInput(true)}>
         {icon && <Icon name={icon} rotation={iconRotation} spin={iconSpin} />}
         <div>{content}</div>
         <input
           ref={this.inputRef}
           className="NumberInput__input"
           style={{
-            display: !this.state.inInput ? 'none' : undefined,
+            'display': !this.state.inInput ? 'none' : undefined,
             'text-align': 'left',
           }}
           onBlur={(e) => {
@@ -310,3 +309,55 @@ export class ButtonInput extends Component {
 }
 
 Button.Input = ButtonInput;
+
+export class ButtonFile extends Component {
+  constructor() {
+    super();
+    this.inputRef = createRef();
+  }
+
+  async read(files) {
+    const promises = Array.from(files).map((file) => {
+      let reader = new FileReader();
+      return new Promise((resolve) => {
+        reader.onload = () => resolve(reader.result);
+        reader.readAsText(file);
+      });
+    });
+
+    return await Promise.all(promises);
+  }
+
+  render() {
+    const { onSelectFiles, accept, multiple, ...rest } = this.props;
+    const filePicker = (
+      <input
+        hidden
+        type="file"
+        ref={this.inputRef}
+        accept={accept}
+        multiple={multiple}
+        onChange={async () => {
+          const files = this.inputRef.current.files;
+          if (files.length) {
+            const readFiles = await this.read(files);
+            onSelectFiles(multiple ? readFiles : readFiles[0]);
+          }
+        }}
+      />
+    );
+    return (
+      <>
+        <Button
+          {...rest}
+          onClick={() => {
+            this.inputRef.current.click();
+          }}
+        />
+        {filePicker}
+      </>
+    );
+  }
+}
+
+Button.File = ButtonFile;

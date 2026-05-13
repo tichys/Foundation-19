@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-This repository is built and tested against BYOND version `515.1641` at time of writing. If this version number is at odds with `BYOND_MAJOR`.`BYOND_MINOR` as defined in [`./github/workflows/test.yml`](https://github.com/Baystation12/Baystation12/blob/dev/.github/workflows/test.yml#L12), the Actions configuration should be considered authoritative and this document should be noted as out of date. Security vulnerabilities or exploits that apply to this version should be reported so that they can be closed.
+This repository is built and tested against BYOND version `516.1661` at time of writing. If this version number is at odds with `BYOND_MAJOR`.`BYOND_MINOR` as defined in [`./github/workflows/test.yml`](https://github.com/Baystation12/Baystation12/blob/dev/.github/workflows/test.yml#L12), the Actions configuration should be considered authoritative and this document should be noted as out of date. Security vulnerabilities or exploits that apply to this version should be reported so that they can be closed.
 
 ## Reporting a Vulnerability
 

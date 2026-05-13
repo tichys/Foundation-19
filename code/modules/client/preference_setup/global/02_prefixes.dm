@@ -57,14 +57,14 @@
 			. += SPAN_CLASS("linkOff","Change")
 		else
 
-			. += "<a href='?src=\ref[src];change_prefix=\ref[prefix_instance]'>Change</a>"
+			. += "<a href='byond://?src=\ref[src];change_prefix=\ref[prefix_instance]'>Change</a>"
 
 		. += "</td><td>"
 
 		if(prefix_instance.is_locked || current_prefix == prefix_instance.default_key)
 			. += SPAN_CLASS("linkOff","Reset")
 		else
-			. += "<a href='?src=\ref[src];reset_prefix=\ref[prefix_instance]'>Reset</a>"
+			. += "<a href='byond://?src=\ref[src];reset_prefix=\ref[prefix_instance]'>Reset</a>"
 		. += "</td></tr>"
 	. += "</table>"
 

@@ -115,11 +115,11 @@
 			for(var/datum/job/job in map_job_list)
 
 				var/title = job.title
-				var/title_link = length(job.alt_titles) ? "<a href='?src=\ref[src];select_alt_title=\ref[job]'>[pref.GetPlayerAltTitle(job)]</a>" : job.title
+				var/title_link = length(job.alt_titles) ? "<a href='byond://?src=\ref[src];select_alt_title=\ref[job]'>[pref.GetPlayerAltTitle(job)]</a>" : job.title
 				if((title in SSjobs.titles_by_department(COM)) || (title == "AIC"))//Bold head jobs
 					title_link = "<b>[title_link]</b>"
 
-				var/help_link = "</td><td width = '10%' align = 'center'><a href='?src=\ref[src];job_info=[title]'>?</a></td>"
+				var/help_link = "</td><td width = '10%' align = 'center'><a href='byond://?src=\ref[src];job_info=[title]'>?</a></td>"
 				lastJob = job
 
 				var/bodytype = S.get_bodytype()
@@ -152,9 +152,9 @@
 
 				var/skill_link
 				if(pref.points_by_job[job] && (!job.available_by_default || current_level != JOB_LEVEL_NEVER))
-					skill_link = "<a class = 'Points' href='?src=\ref[src];set_skills=[title]'>Set Skills</a>"
+					skill_link = "<a class = 'Points' href='byond://?src=\ref[src];set_skills=[title]'>Set Skills</a>"
 				else
-					skill_link = "<a href='?src=\ref[src];set_skills=[title]'>View Skills</a>"
+					skill_link = "<a href='byond://?src=\ref[src];set_skills=[title]'>View Skills</a>"
 				skill_link = "<td>[skill_link]</td>"
 
 				// Begin assembling the actual HTML.
@@ -197,7 +197,7 @@
 					else
 						yes_link = FONT_COLORED("black","[yes_link]")
 						no_link = FONT_COLORED("#55cc55","[no_link]")
-					. += "<a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_LOW]'>[yes_link]</a><a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_NEVER]'>[no_link]</a>"
+					. += "<a href='byond://?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_LOW]'>[yes_link]</a><a href='byond://?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_NEVER]'>[no_link]</a>"
 				else if(!job.available_by_default)
 					. += "<font color = '#cccccc'>Not available at roundstart.</font>"
 				else
@@ -211,19 +211,19 @@
 							level_link = FONT_COLORED("#55cc55","High")
 						else
 							level_link = "<font color=black>Never</font>"
-					. += {"<a href='?src=\ref[src];set_job=[title];inc_level=-1' oncontextmenu='window.location.href="?src=\ref[src];set_job=[title];inc_level=1"; return false'>[level_link]</a>"}
+					. += {"<a href='byond://?src=\ref[src];set_job=[title];inc_level=-1' oncontextmenu='window.location.href="byond://?src=\ref[src];set_job=[title];inc_level=1"; return false'>[level_link]</a>"}
 				. += "</td></tr>"
 			. += "</td></tr></table>"
 			. += "</center></table><center>"
 	. += "<hr/>"
 	switch(pref.alternate_option)
 		if(GET_RANDOM_JOB)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Get random job if preferences unavailable</a></u>"
+			. += "<u><a href='byond://?src=\ref[src];job_alternative=1'>Get random job if preferences unavailable</a></u>"
 		if(BE_CLASS_D)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Be a <font color='#E55700'>Class-D</font> if preference unavailable</a></u>"
+			. += "<u><a href='byond://?src=\ref[src];job_alternative=1'>Be a <font color='#E55700'>Class-D</font> if preference unavailable</a></u>"
 		if(RETURN_TO_LOBBY)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Return to lobby if preference unavailable</a></u>"
-	. += "<a href='?src=\ref[src];reset_jobs=1'>\[Reset\]</a></center>"
+			. += "<u><a href='byond://?src=\ref[src];job_alternative=1'>Return to lobby if preference unavailable</a></u>"
+	. += "<a href='byond://?src=\ref[src];reset_jobs=1'>\[Reset\]</a></center>"
 	. += "</tt><br>"
 	. = jointext(.,null)
 
@@ -297,7 +297,8 @@
 		for(i=1, i <= length(S.levels), i++)
 			var/level_name = S.levels[i]
 			HTML +=	"<br><b>[level_name]</b>: [S.levels[level_name]]<br>"
-		show_browser(user, jointext(HTML, null), "window=\ref[user]skillinfo")
+		HTML = jointext(HTML, null)
+		show_browser(user, HTML_SKELETON(HTML), "window=\ref[user]skillinfo")
 
 	else if(href_list["job_info"])
 

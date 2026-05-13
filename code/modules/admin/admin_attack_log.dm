@@ -123,5 +123,5 @@
 	if(location)
 		message = message + " [ADMIN_JMP(location)]"
 	if(mob)
-		message = message + " (<a HREF='?_src_=holder;adminplayerobservefollow=\ref[mob]'>MOB</a>)"
+		message = message + " (<a href='byond://?_src_=holder;adminplayerobservefollow=\ref[mob]'>MOB</a>)"
 	return message

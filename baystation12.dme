@@ -66,6 +66,7 @@
 #include "code\__defines\guns.dm"
 #include "code\__defines\health.dm"
 #include "code\__defines\holomap.dm"
+#include "code\__defines\html.dm"
 #include "code\__defines\hydroponics.dm"
 #include "code\__defines\integrated_circuits.dm"
 #include "code\__defines\inventory_sizes.dm"

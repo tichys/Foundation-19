@@ -94,8 +94,8 @@
 	received_faxes += to_add
 	history += to_add
 
-	var/fax_reply_message = origin_department == "Unknown" ? "" : ", <a href='?src=\ref[src];send_fax=[current_history_id]'>Reply with Fax</a>"
-	var/adjusted_message = SPAN_NOTICE("<b><font color=darkgreen>FAX TO [name] FROM [origin_department] BY [ADMIN_FULLMONTY(sender)]</b></font> - <a href='?_src_=holder;AdminFaxView=\ref[ref]'>View</a>, <a href='?src=\ref[src];take=[current_history_id]'>Take</a>, <a href='?src=\ref[src];send_message=[current_history_id]'>Reply with Message</a>[fax_reply_message]")
+	var/fax_reply_message = origin_department == "Unknown" ? "" : ", <a href='byond://?src=\ref[src];send_fax=[current_history_id]'>Reply with Fax</a>"
+	var/adjusted_message = SPAN_NOTICE("<b><font color=darkgreen>FAX TO [name] FROM [origin_department] BY [ADMIN_FULLMONTY(sender)]</b></font> - <a href='byond://?_src_=holder;AdminFaxView=\ref[ref]'>View</a>, <a href='byond://?src=\ref[src];take=[current_history_id]'>Take</a>, <a href='byond://?src=\ref[src];send_message=[current_history_id]'>Reply with Message</a>[fax_reply_message]")
 	for(var/client/C in GLOB.admins)
 		if(R_MOD & C.holder.rights)
 			to_chat(C, adjusted_message)
@@ -142,7 +142,7 @@
 	received_messages += to_add
 	history += to_add
 
-	var/adjusted_message = SPAN_NOTICE("<b><font color=orange>MESSAGE TO [name] FROM [ADMIN_FULLMONTY(sender)] - <a href='?src=\ref[src];take=[current_history_id]'>Take</a>, <a href='?src=\ref[src];send_message=[current_history_id]'>Reply</a></b></font>: [message]")
+	var/adjusted_message = SPAN_NOTICE("<b><font color=orange>MESSAGE TO [name] FROM [ADMIN_FULLMONTY(sender)] - <a href='byond://?src=\ref[src];take=[current_history_id]'>Take</a>, <a href='byond://?src=\ref[src];send_message=[current_history_id]'>Reply</a></b></font>: [message]")
 
 	for(var/client/C in GLOB.admins)
 		if(R_MOD & C.holder.rights)

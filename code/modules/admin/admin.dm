@@ -59,7 +59,7 @@ var/global/floorIsLava = 0
 				continue
 			note_keys -= t
 
-	dat += "<center><b>Search term:</b> <a href='?src=\ref[src];notes=set_filter'>[filter_term ? filter_term : "-----"]</a></center><hr>"
+	dat += "<center><b>Search term:</b> <a href='byond://?src=\ref[src];notes=set_filter'>[filter_term ? filter_term : "-----"]</a></center><hr>"
 
 	if(!note_keys)
 		dat += "No notes found."
@@ -67,7 +67,7 @@ var/global/floorIsLava = 0
 		dat += "<table>"
 		note_keys = sortList(note_keys)
 		for(var/t in note_keys)
-			dat += "<tr><td><a href='?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
+			dat += "<tr><td><a href='byond://?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
 		dat += "</table><br>"
 
 	var/datum/browser/popup = new(usr, "player_notes", "Player Notes", 400, 400)
@@ -124,11 +124,11 @@ var/global/floorIsLava = 0
 				update_file = 1
 			dat += "<li><font color=#7d9177>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color='#8a94a3'>[I.timestamp]</i></font> "
 			if(I.author == usr.key || I.author == "Adminbot" || ishost(usr))
-				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
+				dat += "<A href='byond://?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
 			dat += "<hr></li>"
 		if(update_file) to_save(info, infos)
 
-	dat += "</ul><br><A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
+	dat += "</ul><br><A href='byond://?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
 
 	var/html = {"
 		<html>
@@ -186,12 +186,12 @@ var/global/floorIsLava = 0
 				<BR>Note that this panel allows full freedom over the news network, there are no constrictions except the few basic ones. Don't break things!
 			"}
 			if(torch_network.wanted_issue)
-				dat+= "<HR><A href='?src=\ref[src];ac_view_wanted=1'>Read Wanted Issue</A>"
+				dat+= "<HR><A href='byond://?src=\ref[src];ac_view_wanted=1'>Read Wanted Issue</A>"
 
-			dat+= {"<HR><BR><A href='?src=\ref[src];ac_create_channel=1'>Create Feed Channel</A>
-				<BR><A href='?src=\ref[src];ac_view=1'>View Feed Channels</A>
-				<BR><A href='?src=\ref[src];ac_create_feed_story=1'>Submit new Feed story</A>
-				<BR><BR><A href='?src=\ref[usr];mach_close=newscaster_main'>Exit</A>
+			dat+= {"<HR><BR><A href='byond://?src=\ref[src];ac_create_channel=1'>Create Feed Channel</A>
+				<BR><A href='byond://?src=\ref[src];ac_view=1'>View Feed Channels</A>
+				<BR><A href='byond://?src=\ref[src];ac_create_feed_story=1'>Submit new Feed story</A>
+				<BR><BR><A href='byond://?src=\ref[usr];mach_close=newscaster_main'>Exit</A>
 			"}
 
 			var/wanted_already = 0
@@ -199,10 +199,10 @@ var/global/floorIsLava = 0
 				wanted_already = 1
 
 			dat+={"<HR><B>Feed Security functions:</B><BR>
-				<BR><A href='?src=\ref[src];ac_menu_wanted=1'>[(wanted_already) ? ("Manage") : ("Publish")] \"Wanted\" Issue</A>
-				<BR><A href='?src=\ref[src];ac_menu_censor_story=1'>Censor Feed Stories</A>
-				<BR><A href='?src=\ref[src];ac_menu_censor_channel=1'>Mark Feed Channel with [GLOB.using_map.company_name] D-Notice (disables and locks the channel.</A>
-				<BR><HR><A href='?src=\ref[src];ac_set_signature=1'>The newscaster recognises you as:<BR> <FONT COLOR='green'>[src.admincaster_signature]</FONT></A>
+				<BR><A href='byond://?src=\ref[src];ac_menu_wanted=1'>[(wanted_already) ? ("Manage") : ("Publish")] \"Wanted\" Issue</A>
+				<BR><A href='byond://?src=\ref[src];ac_menu_censor_story=1'>Censor Feed Stories</A>
+				<BR><A href='byond://?src=\ref[src];ac_menu_censor_channel=1'>Mark Feed Channel with [GLOB.using_map.company_name] D-Notice (disables and locks the channel.</A>
+				<BR><HR><A href='byond://?src=\ref[src];ac_set_signature=1'>The newscaster recognises you as:<BR> <FONT COLOR='green'>[src.admincaster_signature]</FONT></A>
 			"}
 		if(1)
 			dat+= "Feed Channels<HR>"
@@ -211,38 +211,38 @@ var/global/floorIsLava = 0
 			else
 				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
 					if(CHANNEL.is_admin_channel)
-						dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen'><A href='?src=\ref[src];ac_show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A></FONT></B><BR>"
+						dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen'><A href='byond://?src=\ref[src];ac_show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A></FONT></B><BR>"
 					else
-						dat+="<B><A href='?src=\ref[src];ac_show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (FONT_COLORED("red","***")) : null ]<BR></B>"
-			dat+={"<BR><HR><A href='?src=\ref[src];ac_refresh=1'>Refresh</A>
-				<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A>
+						dat+="<B><A href='byond://?src=\ref[src];ac_show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (FONT_COLORED("red","***")) : null ]<BR></B>"
+			dat+={"<BR><HR><A href='byond://?src=\ref[src];ac_refresh=1'>Refresh</A>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Back</A>
 			"}
 
 		if(2)
 			dat+={"
 				Creating new Feed Channel...
-				<HR><B><A href='?src=\ref[src];ac_set_channel_name=1'>Channel Name</A>:</B> [src.admincaster_feed_channel.channel_name]<BR>
-				<B><A href='?src=\ref[src];ac_set_signature=1'>Channel Author</A>:</B> <FONT COLOR='green'>[src.admincaster_signature]</FONT><BR>
-				<B><A href='?src=\ref[src];ac_set_channel_lock=1'>Will Accept Public Feeds</A>:</B> [(src.admincaster_feed_channel.locked) ? ("NO") : ("YES")]<BR><BR>
-				<BR><A href='?src=\ref[src];ac_submit_new_channel=1'>Submit</A><BR><BR><A href='?src=\ref[src];ac_setScreen=[0]'>Cancel</A><BR>
+				<HR><B><A href='byond://?src=\ref[src];ac_set_channel_name=1'>Channel Name</A>:</B> [src.admincaster_feed_channel.channel_name]<BR>
+				<B><A href='byond://?src=\ref[src];ac_set_signature=1'>Channel Author</A>:</B> <FONT COLOR='green'>[src.admincaster_signature]</FONT><BR>
+				<B><A href='byond://?src=\ref[src];ac_set_channel_lock=1'>Will Accept Public Feeds</A>:</B> [(src.admincaster_feed_channel.locked) ? ("NO") : ("YES")]<BR><BR>
+				<BR><A href='byond://?src=\ref[src];ac_submit_new_channel=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Cancel</A><BR>
 			"}
 		if(3)
 			dat+={"
 				Creating new Feed Message...
-				<HR><B><A href='?src=\ref[src];ac_set_channel_receiving=1'>Receiving Channel</A>:</B> [src.admincaster_feed_channel.channel_name]<BR>" //MARK
+				<HR><B><A href='byond://?src=\ref[src];ac_set_channel_receiving=1'>Receiving Channel</A>:</B> [src.admincaster_feed_channel.channel_name]<BR>" //MARK
 				<B>Message Author:</B> <FONT COLOR='green'>[src.admincaster_signature]</FONT><BR>
-				<B><A href='?src=\ref[src];ac_set_new_message=1'>Message Body</A>:</B> [src.admincaster_feed_message.body] <BR>
-				<BR><A href='?src=\ref[src];ac_submit_new_message=1'>Submit</A><BR><BR><A href='?src=\ref[src];ac_setScreen=[0]'>Cancel</A><BR>
+				<B><A href='byond://?src=\ref[src];ac_set_new_message=1'>Message Body</A>:</B> [src.admincaster_feed_message.body] <BR>
+				<BR><A href='byond://?src=\ref[src];ac_submit_new_message=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Cancel</A><BR>
 			"}
 		if(4)
 			dat+={"
 					Feed story successfully submitted to [src.admincaster_feed_channel.channel_name].<BR><BR>
-					<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+					<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
 				"}
 		if(5)
 			dat+={"
 				Feed Channel [src.admincaster_feed_channel.channel_name] created successfully.<BR><BR>
-				<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
 			"}
 		if(6)
 			dat+="<B><FONT COLOR='maroon'>ERROR: Could not submit Feed story to Network.</B></FONT><HR><BR>"
@@ -250,7 +250,7 @@ var/global/floorIsLava = 0
 				dat+="<FONT COLOR='maroon'>Invalid receiving channel name.</FONT><BR>"
 			if(src.admincaster_feed_message.body == "" || src.admincaster_feed_message.body == "\[REDACTED\]")
 				dat+="<FONT COLOR='maroon'>Invalid message body.</FONT><BR>"
-			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[3]'>Return</A><BR>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[3]'>Return</A><BR>"
 		if(7)
 			dat+="<B><FONT COLOR='maroon'>ERROR: Could not submit Feed Channel to Network.</B></FONT><HR><BR>"
 			if(src.admincaster_feed_channel.channel_name =="" || src.admincaster_feed_channel.channel_name == "\[REDACTED\]")
@@ -262,7 +262,7 @@ var/global/floorIsLava = 0
 					break
 			if(check)
 				dat+="<FONT COLOR='maroon'>Channel name already in use.</FONT><BR>"
-			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[2]'>Return</A><BR>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[2]'>Return</A><BR>"
 		if(9)
 			dat+="<B>[src.admincaster_feed_channel.channel_name]: </B><FONT SIZE=1>\[created by: <FONT COLOR='maroon'>[src.admincaster_feed_channel.author]</FONT>\]</FONT><HR>"
 			if(src.admincaster_feed_channel.censored)
@@ -283,8 +283,8 @@ var/global/floorIsLava = 0
 							dat+="<img src='tmp_photo[i].png' width = '180'><BR><BR>"
 						dat+="<FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
 			dat+={"
-				<BR><HR><A href='?src=\ref[src];ac_refresh=1'>Refresh</A>
-				<BR><A href='?src=\ref[src];ac_setScreen=[1]'>Back</A>
+				<BR><HR><A href='byond://?src=\ref[src];ac_refresh=1'>Refresh</A>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=[1]'>Back</A>
 			"}
 		if(10)
 			dat+={"
@@ -297,8 +297,8 @@ var/global/floorIsLava = 0
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
 				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
-					dat+="<A href='?src=\ref[src];ac_pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (FONT_COLORED("red","***")) : null ]<BR>"
-			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Cancel</A>"
+					dat+="<A href='byond://?src=\ref[src];ac_pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (FONT_COLORED("red","***")) : null ]<BR>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Cancel</A>"
 		if(11)
 			dat+={"
 				<B>[GLOB.using_map.company_name] D-Notice Handler</B><HR>
@@ -310,13 +310,13 @@ var/global/floorIsLava = 0
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
 				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
-					dat+="<A href='?src=\ref[src];ac_pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (FONT_COLORED("red","***")) : null ]<BR>"
+					dat+="<A href='byond://?src=\ref[src];ac_pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (FONT_COLORED("red","***")) : null ]<BR>"
 
-			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Back</A>"
 		if(12)
 			dat+={"
 				<B>[src.admincaster_feed_channel.channel_name]: </B><FONT SIZE=1>\[ created by: <FONT COLOR='maroon'>[src.admincaster_feed_channel.author]</FONT> \]</FONT><BR>
-				<FONT SIZE=2><A href='?src=\ref[src];ac_censor_channel_author=\ref[src.admincaster_feed_channel]'>[(src.admincaster_feed_channel.author=="\[REDACTED\]") ? ("Undo Author censorship") : ("Censor channel Author")]</A></FONT><HR>
+				<FONT SIZE=2><A href='byond://?src=\ref[src];ac_censor_channel_author=\ref[src.admincaster_feed_channel]'>[(src.admincaster_feed_channel.author=="\[REDACTED\]") ? ("Undo Author censorship") : ("Censor channel Author")]</A></FONT><HR>
 			"}
 			if( !length(admincaster_feed_channel.messages) )
 				dat+="<I>No feed messages found in channel...</I><BR>"
@@ -324,13 +324,13 @@ var/global/floorIsLava = 0
 				for(var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
 					dat+={"
 						-[MESSAGE.body] <BR><FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>
-						<FONT SIZE=2><A href='?src=\ref[src];ac_censor_channel_story_body=\ref[MESSAGE]'>[(MESSAGE.body == "\[REDACTED\]") ? ("Undo story censorship") : ("Censor story")]</A>  -  <A href='?src=\ref[src];ac_censor_channel_story_author=\ref[MESSAGE]'>[(MESSAGE.author == "\[REDACTED\]") ? ("Undo Author Censorship") : ("Censor message Author")]</A></FONT><BR>
+						<FONT SIZE=2><A href='byond://?src=\ref[src];ac_censor_channel_story_body=\ref[MESSAGE]'>[(MESSAGE.body == "\[REDACTED\]") ? ("Undo story censorship") : ("Censor story")]</A>  -  <A href='byond://?src=\ref[src];ac_censor_channel_story_author=\ref[MESSAGE]'>[(MESSAGE.author == "\[REDACTED\]") ? ("Undo Author Censorship") : ("Censor message Author")]</A></FONT><BR>
 					"}
-			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[10]'>Back</A>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[10]'>Back</A>"
 		if(13)
 			dat+={"
 				<B>[src.admincaster_feed_channel.channel_name]: </B><FONT SIZE=1>\[ created by: <FONT COLOR='maroon'>[src.admincaster_feed_channel.author]</FONT> \]</FONT><BR>
-				Channel messages listed below. If you deem them dangerous to the [station_name()], you can <A href='?src=\ref[src];ac_toggle_d_notice=\ref[src.admincaster_feed_channel]'>Bestow a D-Notice upon the channel</A>.<HR>
+				Channel messages listed below. If you deem them dangerous to the [station_name()], you can <A href='byond://?src=\ref[src];ac_toggle_d_notice=\ref[src.admincaster_feed_channel]'>Bestow a D-Notice upon the channel</A>.<HR>
 			"}
 			if(src.admincaster_feed_channel.censored)
 				dat+={"
@@ -344,7 +344,7 @@ var/global/floorIsLava = 0
 					for(var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
 						dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
 
-			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[11]'>Back</A>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[11]'>Back</A>"
 		if(14)
 			dat+="<B>Wanted Issue Handler:</B>"
 			var/wanted_already = 0
@@ -356,21 +356,21 @@ var/global/floorIsLava = 0
 				dat+="<FONT SIZE=2><BR><I>A wanted issue is already in Feed Circulation. You can edit or cancel it below.</FONT></I>"
 			dat+={"
 				<HR>
-				<A href='?src=\ref[src];ac_set_wanted_name=1'>Criminal Name</A>: [src.admincaster_feed_message.author] <BR>
-				<A href='?src=\ref[src];ac_set_wanted_desc=1'>Description</A>: [src.admincaster_feed_message.body] <BR>
+				<A href='byond://?src=\ref[src];ac_set_wanted_name=1'>Criminal Name</A>: [src.admincaster_feed_message.author] <BR>
+				<A href='byond://?src=\ref[src];ac_set_wanted_desc=1'>Description</A>: [src.admincaster_feed_message.body] <BR>
 			"}
 			if(wanted_already)
 				dat+="<B>Wanted Issue created by:</B><FONT COLOR='green'> [torch_network.wanted_issue.backup_author]</FONT><BR>"
 			else
 				dat+="<B>Wanted Issue will be created under prosecutor:</B><FONT COLOR='green'> [src.admincaster_signature]</FONT><BR>"
-			dat+="<BR><A href='?src=\ref[src];ac_submit_wanted=[end_param]'>[(wanted_already) ? ("Edit Issue") : ("Submit")]</A>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_submit_wanted=[end_param]'>[(wanted_already) ? ("Edit Issue") : ("Submit")]</A>"
 			if(wanted_already)
-				dat+="<BR><A href='?src=\ref[src];ac_cancel_wanted=1'>Take down Issue</A>"
-			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Cancel</A>"
+				dat+="<BR><A href='byond://?src=\ref[src];ac_cancel_wanted=1'>Take down Issue</A>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Cancel</A>"
 		if(15)
 			dat+={"
 				<FONT COLOR='green'>Wanted issue for [src.admincaster_feed_message.author] is now in Network Circulation.</FONT><BR><BR>
-				<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
 			"}
 		if(16)
 			dat+="<B><FONT COLOR='maroon'>ERROR: Wanted Issue rejected by Network.</B></FONT><HR><BR>"
@@ -378,11 +378,11 @@ var/global/floorIsLava = 0
 				dat+="<FONT COLOR='maroon'>Invalid name for person wanted.</FONT><BR>"
 			if(src.admincaster_feed_message.body == "" || src.admincaster_feed_message.body == "\[REDACTED\]")
 				dat+="<FONT COLOR='maroon'>Invalid description.</FONT><BR>"
-			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>"
 		if(17)
 			dat+={"
 				<B>Wanted Issue successfully deleted from Circulation</B><BR>
-				<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
 			"}
 		if(18)
 			dat+={"
@@ -396,11 +396,11 @@ var/global/floorIsLava = 0
 				dat+="<BR><img src='tmp_photow.png' width = '180'>"
 			else
 				dat+="None"
-			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A><BR>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Back</A><BR>"
 		if(19)
 			dat+={"
 				<FONT COLOR='green'>Wanted issue for [src.admincaster_feed_message.author] successfully edited.</FONT><BR><BR>
-				<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
 			"}
 		else
 			dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
@@ -421,7 +421,7 @@ var/global/floorIsLava = 0
 		var/r = t
 		if( findtext(r,"##") )
 			r = copytext( r, 1, findtext(r,"##") )//removes the description
-		dat += text("<tr><td>[t] (<A href='?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
+		dat += text("<tr><td>[t] (<A href='byond://?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
 	dat += "</table>"
 	show_browser(usr, dat, "window=ban;size=400x400")
 
@@ -430,22 +430,22 @@ var/global/floorIsLava = 0
 
 	var/dat = {"
 		<center><B>Game Panel</B></center><hr>\n
-		<A href='?src=\ref[src];c_mode=1'>Change Game Mode</A><br>
+		<A href='byond://?src=\ref[src];c_mode=1'>Change Game Mode</A><br>
 		"}
 	if(SSticker.master_mode == "secret")
-		dat += "<A href='?src=\ref[src];f_secret=1'>(Force Secret Mode)</A><br>"
+		dat += "<A href='byond://?src=\ref[src];f_secret=1'>(Force Secret Mode)</A><br>"
 
 	dat += {"
 		<BR>
-		<A href='?src=\ref[src];create_object=1'>Create Object</A><br>
-		<A href='?src=\ref[src];create_turf=1'>Create Turf</A><br>
-		<A href='?src=\ref[src];create_mob=1'>Create Mob</A><br>
-		<br><A href='?src=\ref[src];vsc=airflow'>Edit Airflow Settings</A><br>
-		<A href='?src=\ref[src];vsc=phoron'>Edit Phoron Settings</A><br>
-		<A href='?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
+		<A href='byond://?src=\ref[src];create_object=1'>Create Object</A><br>
+		<A href='byond://?src=\ref[src];create_turf=1'>Create Turf</A><br>
+		<A href='byond://?src=\ref[src];create_mob=1'>Create Mob</A><br>
+		<br><A href='byond://?src=\ref[src];vsc=airflow'>Edit Airflow Settings</A><br>
+		<A href='byond://?src=\ref[src];vsc=phoron'>Edit Phoron Settings</A><br>
+		<A href='byond://?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
 		"}
 
-	show_browser(usr, dat, "window=admin2;size=210x280")
+	show_browser(usr, HTML_SKELETON(dat), "window=admin2;size=210x280")
 	return
 
 /datum/admins/proc/Secrets(datum/admin_secret_category/active_category = null)
@@ -459,7 +459,7 @@ var/global/floorIsLava = 0
 		if(active_category == category)
 			dat += SPAN_CLASS("linkOn","[category.name]")
 		else
-			dat += "<A href='?src=\ref[src];admin_secrets_panel=\ref[category]'>[category.name]</A> "
+			dat += "<A href='byond://?src=\ref[src];admin_secrets_panel=\ref[category]'>[category.name]</A> "
 	dat += "<HR>"
 
 	// If a category is selected, print its description and then options
@@ -469,7 +469,7 @@ var/global/floorIsLava = 0
 		for(var/datum/admin_secret_item/item in active_category.items)
 			if(!item.can_view(usr))
 				continue
-			dat += "<A href='?src=\ref[src];admin_secrets=\ref[item]'>[item.name()]</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];admin_secrets=\ref[item]'>[item.name()]</A><BR>"
 		dat += "<BR>"
 
 	var/datum/browser/popup = new(usr, "secrets", "Secrets", 550, 500)
@@ -962,66 +962,66 @@ var/global/floorIsLava = 0
 		alert("Not before roundstart!", "Alert")
 		return
 
-	var/out = "<font size=3><b>Current mode: [SSticker.mode.name] (<a href='?src=\ref[SSticker.mode];debug_antag=self'>[SSticker.mode.config_tag]</a>)</b></font><br/>"
+	var/out = "<font size=3><b>Current mode: [SSticker.mode.name] (<a href='byond://?src=\ref[SSticker.mode];debug_antag=self'>[SSticker.mode.config_tag]</a>)</b></font><br/>"
 	out += "<hr>"
 
 	if(SSticker.mode.ert_disabled)
-		out += "<b>Mobile Task Forces:</b> <a href='?src=\ref[SSticker.mode];toggle=ert'>disabled</a>"
+		out += "<b>Mobile Task Forces:</b> <a href='byond://?src=\ref[SSticker.mode];toggle=ert'>disabled</a>"
 	else
-		out += "<b>Mobile Task Forces:</b> <a href='?src=\ref[SSticker.mode];toggle=ert'>enabled</a>"
+		out += "<b>Mobile Task Forces:</b> <a href='byond://?src=\ref[SSticker.mode];toggle=ert'>enabled</a>"
 	out += "<br/>"
 
 	if(SSticker.mode.deny_respawn)
-		out += "<b>Respawning:</b> <a href='?src=\ref[SSticker.mode];toggle=respawn'>disallowed</a>"
+		out += "<b>Respawning:</b> <a href='byond://?src=\ref[SSticker.mode];toggle=respawn'>disallowed</a>"
 	else
-		out += "<b>Respawning:</b> <a href='?src=\ref[SSticker.mode];toggle=respawn'>allowed</a>"
+		out += "<b>Respawning:</b> <a href='byond://?src=\ref[SSticker.mode];toggle=respawn'>allowed</a>"
 	out += "<br/>"
 
-	out += "<b>Shuttle delay multiplier:</b> <a href='?src=\ref[SSticker.mode];set=shuttle_delay'>[SSticker.mode.shuttle_delay]</a><br/>"
+	out += "<b>Shuttle delay multiplier:</b> <a href='byond://?src=\ref[SSticker.mode];set=shuttle_delay'>[SSticker.mode.shuttle_delay]</a><br/>"
 
 	if(SSticker.mode.auto_recall_shuttle)
-		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[SSticker.mode];toggle=shuttle_recall'>enabled</a>"
+		out += "<b>Shuttle auto-recall:</b> <a href='byond://?src=\ref[SSticker.mode];toggle=shuttle_recall'>enabled</a>"
 	else
-		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[SSticker.mode];toggle=shuttle_recall'>disabled</a>"
+		out += "<b>Shuttle auto-recall:</b> <a href='byond://?src=\ref[SSticker.mode];toggle=shuttle_recall'>disabled</a>"
 	out += "<br/><br/>"
 
 	if(SSticker.mode.event_delay_mod_moderate)
-		out += "<b>Moderate event time modifier:</b> <a href='?src=\ref[SSticker.mode];set=event_modifier_moderate'>[SSticker.mode.event_delay_mod_moderate]</a><br/>"
+		out += "<b>Moderate event time modifier:</b> <a href='byond://?src=\ref[SSticker.mode];set=event_modifier_moderate'>[SSticker.mode.event_delay_mod_moderate]</a><br/>"
 	else
-		out += "<b>Moderate event time modifier:</b> <a href='?src=\ref[SSticker.mode];set=event_modifier_moderate'>unset</a><br/>"
+		out += "<b>Moderate event time modifier:</b> <a href='byond://?src=\ref[SSticker.mode];set=event_modifier_moderate'>unset</a><br/>"
 
 	if(SSticker.mode.event_delay_mod_major)
-		out += "<b>Major event time modifier:</b> <a href='?src=\ref[SSticker.mode];set=event_modifier_severe'>[SSticker.mode.event_delay_mod_major]</a><br/>"
+		out += "<b>Major event time modifier:</b> <a href='byond://?src=\ref[SSticker.mode];set=event_modifier_severe'>[SSticker.mode.event_delay_mod_major]</a><br/>"
 	else
-		out += "<b>Major event time modifier:</b> <a href='?src=\ref[SSticker.mode];set=event_modifier_severe'>unset</a><br/>"
+		out += "<b>Major event time modifier:</b> <a href='byond://?src=\ref[SSticker.mode];set=event_modifier_severe'>unset</a><br/>"
 
 	out += "<hr>"
 
 	if(SSticker.mode.antag_tags && SSticker.mode.antag_tags.len)
 		out += "<b>Core antag templates:</b></br>"
 		for(var/antag_tag in SSticker.mode.antag_tags)
-			out += "<a href='?src=\ref[SSticker.mode];debug_antag=[antag_tag]'>[antag_tag]</a>.</br>"
+			out += "<a href='byond://?src=\ref[SSticker.mode];debug_antag=[antag_tag]'>[antag_tag]</a>.</br>"
 
 	if(SSticker.mode.round_autoantag)
-		out += "<b>Autotraitor <a href='?src=\ref[SSticker.mode];toggle=autotraitor'>enabled</a></b>."
+		out += "<b>Autotraitor <a href='byond://?src=\ref[SSticker.mode];toggle=autotraitor'>enabled</a></b>."
 		if(SSticker.mode.antag_scaling_coeff > 0)
-			out += " (scaling with <a href='?src=\ref[SSticker.mode];set=antag_scaling'>[SSticker.mode.antag_scaling_coeff]</a>)"
+			out += " (scaling with <a href='byond://?src=\ref[SSticker.mode];set=antag_scaling'>[SSticker.mode.antag_scaling_coeff]</a>)"
 		else
-			out += " (not currently scaling, <a href='?src=\ref[SSticker.mode];set=antag_scaling'>set a coefficient</a>)"
+			out += " (not currently scaling, <a href='byond://?src=\ref[SSticker.mode];set=antag_scaling'>set a coefficient</a>)"
 		out += "<br/>"
 	else
-		out += "<b>Autotraitor <a href='?src=\ref[SSticker.mode];toggle=autotraitor'>disabled</a></b>.<br/>"
+		out += "<b>Autotraitor <a href='byond://?src=\ref[SSticker.mode];toggle=autotraitor'>disabled</a></b>.<br/>"
 
 	out += "<b>All antag ids:</b>"
 	if(SSticker.mode.antag_templates && SSticker.mode.antag_templates.len)
 		for(var/datum/antagonist/antag in SSticker.mode.antag_templates)
 			antag.update_current_antag_max(SSticker.mode)
-			out += " <a href='?src=\ref[SSticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"
+			out += " <a href='byond://?src=\ref[SSticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"
 			out += " ([antag.get_antag_count()]/[antag.cur_max]) "
-			out += " <a href='?src=\ref[SSticker.mode];remove_antag_type=[antag.id]'>\[-\]</a><br/>"
+			out += " <a href='byond://?src=\ref[SSticker.mode];remove_antag_type=[antag.id]'>\[-\]</a><br/>"
 	else
 		out += " None."
-	out += " <a href='?src=\ref[SSticker.mode];add_antag_type=1'>\[+\]</a><br/>"
+	out += " <a href='byond://?src=\ref[SSticker.mode];add_antag_type=1'>\[+\]</a><br/>"
 
 	show_browser(usr, out, "window=edit_mode[src]")
 	SSstatistics.add_field_details("admin_verb","SGM")
@@ -1291,7 +1291,7 @@ var/global/floorIsLava = 0
 
 	if(length(GLOB.adminfaxes))
 		for(var/obj/item/item in GLOB.adminfaxes)
-			data += "[item.name] - <a href='?_src_=holder;AdminFaxView=\ref[item]'>view message</a><br>"
+			data += "[item.name] - <a href='byond://?_src_=holder;AdminFaxView=\ref[item]'>view message</a><br>"
 	else
 		data += "<center>No faxes yet.</center>"
 	show_browser(usr, "<HTML><HEAD><TITLE>Fax History</TITLE><meta http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'/></HEAD><BODY>[data]</BODY></HTML>", "window=FaxHistory;size=450x400")
@@ -1344,7 +1344,7 @@ var/global/floorIsLava = 0
 
 	if(success)
 		log_admin("[key_name(src.owner)] has sent a fax message to [P.department]")
-		message_staff("[key_name_admin(src.owner)] has sent a fax message to [P.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)")
+		message_staff("[key_name_admin(src.owner)] has sent a fax message to [P.department] (<a href='byond://?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)")
 	else
 		to_chat(src.owner, SPAN_WARNING("Fax transmission failed! Saved to offsite log for recovery of contents."))
 

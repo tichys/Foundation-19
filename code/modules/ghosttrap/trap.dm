@@ -71,7 +71,7 @@ var/list/ghost_traps
 		RegisterSignal(target, COMSIG_PARENT_QDELETING, TYPE_PROC_REF(/datum/ghosttrap, unregister_target))
 	else
 		unregister_target(target)
-	
+
 	valid_targets |= target
 	for(var/mob/observer/ghost/O in GLOB.player_list)
 		if(!assess_candidate(O, target, FALSE))
@@ -79,7 +79,7 @@ var/list/ghost_traps
 		if(pref_check && !O.client.wishes_to_be_role(pref_check))
 			continue
 		if(O.client)
-			to_chat(O, "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")
+			to_chat(O, "[request_string] <a href='byond://?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")
 
 /datum/ghosttrap/proc/unregister_target(target)
 	request_timeouts -= target

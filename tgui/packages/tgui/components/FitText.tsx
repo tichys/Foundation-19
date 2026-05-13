@@ -1,4 +1,4 @@
-import { Component, createRef, Inferno, RefObject } from 'inferno';
+import { Component, createRef, RefObject } from 'inferno';
 
 const DEFAULT_ACCEPTABLE_DIFFERENCE = 5;
 
@@ -6,7 +6,7 @@ type Props = {
   acceptableDifference?: number;
   maxWidth: number;
   maxFontSize: number;
-  native?: Inferno.HTMLAttributes<HTMLDivElement>;
+  native?: HTMLAttributes<HTMLDivElement>;
 };
 
 type State = {
@@ -83,8 +83,7 @@ export class FitText extends Component<Props, State> {
           'font-size': `${this.state.fontSize}px`,
           ...(typeof this.props.native?.style === 'object' &&
             this.props.native.style),
-        }}
-      >
+        }}>
         {this.props.children}
       </span>
     );

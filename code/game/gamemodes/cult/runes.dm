@@ -218,8 +218,8 @@
 	for(var/obj/effect/rune/teleport/T in GLOB.cult.teleport_runes)
 		if(T == src)
 			continue
-		t += "<a href='?src=\ref[src];target=\ref[T]'>[T.destination]</a>"
-	to_chat(user, "Teleport runes: [english_list(t, nothing_text = "no other runes exist")]... or <a href='?src=\ref[src];leave=1'>return from this rune</a>.")
+		t += "<a href='byond://?src=\ref[src];target=\ref[T]'>[T.destination]</a>"
+	to_chat(user, "Teleport runes: [english_list(t, nothing_text = "no other runes exist")]... or <a href='byond://?src=\ref[src];leave=1'>return from this rune</a>.")
 
 /obj/effect/rune/teleport/proc/leaveRune(mob/living/user)
 	if(user.loc != src)

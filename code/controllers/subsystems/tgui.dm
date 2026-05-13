@@ -33,6 +33,23 @@ SUBSYSTEM_DEF(tgui)
 	polyfill = "<script>\n[polyfill]\n</script>"
 	basehtml = replacetextEx(basehtml, "<!-- tgui:inline-polyfill -->", polyfill)
 
+	var/storage_iframe = config.storage_cdn_iframe
+	if(storage_iframe && storage_iframe != /datum/configuration::storage_cdn_iframe)
+		basehtml = replacetextEx(basehtml, "tgui:storagecdn", storage_iframe)
+		return
+
+	if(config.asset_transport == "webroot")
+		var/datum/asset_transport/webroot/webroot = SSassets.transport
+
+		var/datum/asset_cache_item/item = webroot.register_asset("iframe.html", file("tgui/public/iframe.html"))
+		basehtml = replacetext(basehtml, "tgui:storagecdn", webroot.get_asset_url("iframe.html", item))
+		return
+
+	if(!storage_iframe)
+		return
+
+	basehtml = replacetextEx(basehtml, "tgui:storagecdn", storage_iframe)
+
 /datum/controller/subsystem/tgui/Shutdown()
 	close_all_uis()
 
@@ -170,7 +187,7 @@ SUBSYSTEM_DEF(tgui)
  * return datum/tgui The found UI.
  */
 /datum/controller/subsystem/tgui/proc/get_open_ui(mob/user, datum/src_object)
-	var/key = "[REF(src_object)]"
+	var/key = ref(src_object)
 	// No UIs opened for this src_object
 	if(isnull(open_uis_by_src[key]) || !istype(open_uis_by_src[key], /list))
 		return null
@@ -191,7 +208,7 @@ SUBSYSTEM_DEF(tgui)
  */
 /datum/controller/subsystem/tgui/proc/update_uis(datum/src_object)
 	var/count = 0
-	var/key = "[REF(src_object)]"
+	var/key = ref(src_object)
 	// No UIs opened for this src_object
 	if(isnull(open_uis_by_src[key]) || !istype(open_uis_by_src[key], /list))
 		return count
@@ -213,7 +230,7 @@ SUBSYSTEM_DEF(tgui)
  */
 /datum/controller/subsystem/tgui/proc/close_uis(datum/src_object)
 	var/count = 0
-	var/key = "[REF(src_object)]"
+	var/key = ref(src_object)
 	// No UIs opened for this src_object
 	if(isnull(open_uis_by_src[key]) || !istype(open_uis_by_src[key], /list))
 		return count
@@ -289,7 +306,7 @@ SUBSYSTEM_DEF(tgui)
  * required ui datum/tgui The UI to be added.
  */
 /datum/controller/subsystem/tgui/proc/on_open(datum/tgui/ui)
-	var/key = "[REF(ui.src_object)]"
+	var/key = ref(ui.src_object)
 	if(isnull(open_uis_by_src[key]) || !istype(open_uis_by_src[key], /list))
 		open_uis_by_src[key] = list()
 	ui.user.tgui_open_uis |= ui
@@ -307,7 +324,7 @@ SUBSYSTEM_DEF(tgui)
  * return bool If the UI was removed or not.
  */
 /datum/controller/subsystem/tgui/proc/on_close(datum/tgui/ui)
-	var/key = "[REF(ui.src_object)]"
+	var/key = ref(ui.src_object)
 	if(isnull(open_uis_by_src[key]) || !istype(open_uis_by_src[key], /list))
 		return FALSE
 	// Remove it from the list of processing UIs.

@@ -5,7 +5,6 @@
  */
 
 import { classes } from 'common/react';
-
 import { useBackend } from '../backend';
 import { Box } from '../components';
 import { useDebug } from '../debug';
@@ -29,8 +28,7 @@ const PaneContent = (props) => {
   return (
     <Layout.Content
       className={classes(['Window__content', className])}
-      {...rest}
-    >
+      {...rest}>
       {(fitted && children) || (
         <div className="Window__contentPadding">{children}</div>
       )}

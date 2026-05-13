@@ -338,7 +338,7 @@
 /client/proc/check_panel_loaded()
 	if(stat_panel.is_ready())
 		return
-	to_chat(src, SPAN_USERDANGER("Statpanel failed to load, click <a href='?src=[REF(src)];reload_statbrowser=1'>here</a> to reload the panel "))
+	to_chat(src, SPAN_USERDANGER("Statpanel failed to load, click <a href='byond://?src=[REF(src)];reload_statbrowser=1'>here</a> to reload the panel "))
 
 /**
  * Initializes dropdown menus on client
@@ -690,7 +690,7 @@
 	// winget() does not work for F1 and F2
 	for(var/key in communication_hotkeys)
 		if(!(key in list("F1","F2")) && !winget(src, "default-\ref[key]", "command"))
-			to_chat(src, "You probably entered the game with a different keyboard layout.\n<a href='?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>")
+			to_chat(src, "You probably entered the game with a different keyboard layout.\n<a href='byond://?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>")
 			break
 
 /client/verb/toggle_fullscreen()

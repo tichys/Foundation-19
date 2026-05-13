@@ -5,7 +5,6 @@
  */
 
 import { Component } from 'inferno';
-
 import { Box } from './Box';
 import { Button } from './Button';
 
@@ -31,8 +30,7 @@ export class Collapsible extends Component {
               color={color}
               icon={open ? 'chevron-down' : 'chevron-right'}
               onClick={() => this.setState({ open: !open })}
-              {...rest}
-            >
+              {...rest}>
               {title}
             </Button>
           </div>

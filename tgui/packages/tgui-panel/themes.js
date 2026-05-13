@@ -34,17 +34,18 @@ export const setClientTheme = (name) => {
   if (name === 'light') {
     return Byond.winset({
       // Main windows
-      'infowindow.background-color': 'none',
-      'infowindow.text-color': '#',
+      'mainwindow.background-color': 'none',
+      'mainwindow.text-color': '#000000',
       'info.background-color': 'none',
       'info.text-color': '#000000',
+      'infowindow.background-color': 'none',
+      'infowindow.text-color': '#000000',
+      'split.background-color': 'none',
+      'split.text-color': '#000000',
       'browseroutput.background-color': 'none',
       'browseroutput.text-color': '#000000',
       'outputwindow.background-color': 'none',
       'outputwindow.text-color': '#000000',
-      'mainwindow.background-color': 'none',
-      'split.background-color': 'none',
-      'split.text-color': '#000000',
       // Buttons
       'changelog.background-color': 'none',
       'changelog.text-color': '#000000',
@@ -81,17 +82,18 @@ export const setClientTheme = (name) => {
   if (name === 'dark') {
     Byond.winset({
       // Main windows
-      'infowindow.background-color': COLOR_DARK_BG,
-      'infowindow.text-color': COLOR_DARK_TEXT,
+      'mainwindow.background-color': COLOR_DARK_BG,
+      'mainwindow.text-color': COLOR_DARK_TEXT,
       'info.background-color': COLOR_DARK_BG,
       'info.text-color': COLOR_DARK_TEXT,
+      'infowindow.background-color': COLOR_DARK_BG,
+      'infowindow.text-color': COLOR_DARK_TEXT,
+      'split.background-color': COLOR_DARK_BG,
+      'split.text-color': COLOR_DARK_TEXT,
       'browseroutput.background-color': COLOR_DARK_BG,
       'browseroutput.text-color': COLOR_DARK_TEXT,
       'outputwindow.background-color': COLOR_DARK_BG,
       'outputwindow.text-color': COLOR_DARK_TEXT,
-      'mainwindow.background-color': COLOR_DARK_BG,
-      'split.background-color': COLOR_DARK_BG,
-      'split.text-color': COLOR_DARK_TEXT,
       // Buttons
       'changelog.background-color': '#494949',
       'changelog.text-color': COLOR_DARK_TEXT,

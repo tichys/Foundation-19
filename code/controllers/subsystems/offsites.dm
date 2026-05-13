@@ -275,7 +275,7 @@ SUBSYSTEM_DEF(offsites)
 
 		for (var/page = 1, page <= B.pages.len, page++)
 			var/obj/pageobj = B.pages[page]
-			data += "<A href='?_src_=holder;AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
+			data += "<A href='byond://?_src_=holder;AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
 
 		show_browser(user, data, "window=[B.name]")
 	else

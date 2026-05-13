@@ -78,7 +78,7 @@
 		recipe_list = srl.recipes
 	var/t1 = list()
 	t1 += "<HTML><HEAD><title>Constructions from [src]</title></HEAD><body><TT>Amount Left: [src.get_amount()]<br>"
-	for(var/i=1;i<=recipe_list.len,i++)
+	for(var/i=1,i<=recipe_list.len,i++)
 		var/E = recipe_list[i]
 		if (isnull(E))
 			continue
@@ -86,7 +86,7 @@
 		if (istype(E, /datum/stack_recipe_list))
 			t1+="<br>"
 			var/datum/stack_recipe_list/srl = E
-			t1 += "\[Sub-menu\] <a href='?src=\ref[src];sublist=[i]'>[srl.title]</a>"
+			t1 += "\[Sub-menu\] <a href='byond://?src=\ref[src];sublist=[i]'>[srl.title]</a>"
 
 		if (istype(E, /datum/stack_recipe))
 			var/datum/stack_recipe/R = E
@@ -105,7 +105,7 @@
 				var/decl/hierarchy/skill/S = decls_repository.get_decl(SKILL_CONSTRUCTION)
 				skill_label = FONT_COLORED("red","[S.levels[R.difficulty]]")
 			if (can_build)
-				t1 +="[skill_label]<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>"
+				t1 +="[skill_label]<A href='byond://?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>"
 			else
 				t1 += "[skill_label][title]"
 			if (R.max_res_amount>1 && max_multiplier>1)
@@ -113,9 +113,9 @@
 				t1 += " |"
 				for (var/n in possible_multipliers)
 					if ((n != 1) && (max_multiplier >= n))
-						t1 += " <A href='?src=\ref[src];make=[i];multiplier=[n]'>[n*R.res_amount]x</A>"
+						t1 += " <A href='byond://?src=\ref[src];make=[i];multiplier=[n]'>[n*R.res_amount]x</A>"
 				if (!(max_multiplier in possible_multipliers))
-					t1 += " <A href='?src=\ref[src];make=[i];multiplier=[max_multiplier]'>[max_multiplier*R.res_amount]x</A>"
+					t1 += " <A href='byond://?src=\ref[src];make=[i];multiplier=[max_multiplier]'>[max_multiplier*R.res_amount]x</A>"
 
 	t1 += "</TT></body></HTML>"
 	var/datum/browser/popup = new(user, "stack", "Recipes")

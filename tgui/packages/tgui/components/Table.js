@@ -5,7 +5,6 @@
  */
 
 import { classes, pureComponentHooks } from 'common/react';
-
 import { computeBoxClassName, computeBoxProps } from './Box';
 
 export const Table = (props) => {
@@ -18,8 +17,7 @@ export const Table = (props) => {
         className,
         computeBoxClassName(rest),
       ])}
-      {...computeBoxProps(rest)}
-    >
+      {...computeBoxProps(rest)}>
       <tbody>{children}</tbody>
     </table>
   );

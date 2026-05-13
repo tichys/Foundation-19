@@ -934,7 +934,7 @@ GLOBAL_LIST_EMPTY(hivemind_bank)
 
 					if(!ownsthis)
 					{
-						body += "<a href='?src=\ref[src];P="+power_type+"'>Evolve</a>"
+						body += "<a href='byond://?src=\ref[src];P="+power_type+"'>Evolve</a>"
 					}
 
 					body += "</td><td align='center'>";

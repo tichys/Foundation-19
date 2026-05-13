@@ -153,12 +153,12 @@
 /obj/structure/scp216/attack_hand(mob/user)
 	var/text_code = add_zero(num2text(current_code, 7), 7)
 	var/dat = "<center>"
-	dat += "<a href='?src=\ref[src];open=1'>[open ? "Close" : "Open"] [src]</a><br>"
-	dat += "Current code: <a href='?src=\ref[src];change_code=1'>[text_code]</a><br>"
+	dat += "<a href='byond://?src=\ref[src];open=1'>[open ? "Close" : "Open"] [src]</a><br>"
+	dat += "Current code: <a href='byond://?src=\ref[src];change_code=1'>[text_code]</a><br>"
 	if(open && (num2text(current_code, 7) in all_codes))
 		dat += "<table>"
 		for(var/atom/movable/A in all_codes[num2text(current_code, 7)])
-			dat += "<tr><td><a href='?src=\ref[src];retrieve=\ref[A]'>[A.name]</a></td></tr>"
+			dat += "<tr><td><a href='byond://?src=\ref[src];retrieve=\ref[A]'>[A.name]</a></td></tr>"
 		dat += "</table></center>"
 	var/datum/browser/popup = new(user, "safe", "Safe", 350, 300)
 	popup.set_content(dat)

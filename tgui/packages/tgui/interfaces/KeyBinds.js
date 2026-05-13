@@ -2,7 +2,7 @@ import { Component } from 'inferno';
 
 import { useBackend } from '../backend';
 import { Box, Button, Flex, Section } from '../components';
-import { globalEvents } from '../events.js';
+import { globalEvents } from '../events';
 import { Window } from '../layouts';
 
 const KEY_MODS = {
@@ -167,7 +167,7 @@ export class ButtonKeybind extends Component {
     const { keysDown } = this.state;
 
     const listOfKeys = Object.keys(keysDown).filter(
-      (isTrue) => keysDown[isTrue],
+      (isTrue) => keysDown[isTrue]
     );
 
     onFinish(listOfKeys);

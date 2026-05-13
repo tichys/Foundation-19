@@ -1,4 +1,4 @@
-import { Inferno, linkEvent } from 'inferno';
+import { linkEvent } from 'inferno';
 import { Button } from 'tgui/components';
 import { createRenderer } from 'tgui/renderer';
 
@@ -24,7 +24,7 @@ export const SingleButtonWithLinkEvent = () => {
 };
 
 export const ListOfButtons = () => {
-  const nodes: Inferno.InfernoElement[] = [];
+  const nodes: JSX.Element[] = [];
   for (let i = 0; i < 100; i++) {
     const node = <Button key={i}>Hello world! {i}</Button>;
     nodes.push(node);
@@ -33,7 +33,7 @@ export const ListOfButtons = () => {
 };
 
 export const ListOfButtonsWithCallback = () => {
-  const nodes: Inferno.InfernoElement[] = [];
+  const nodes: JSX.Element[] = [];
   for (let i = 0; i < 100; i++) {
     const node = (
       <Button key={i} onClick={() => undefined}>
@@ -46,7 +46,7 @@ export const ListOfButtonsWithCallback = () => {
 };
 
 export const ListOfButtonsWithLinkEvent = () => {
-  const nodes: Inferno.InfernoElement[] = [];
+  const nodes: JSX.Element[] = [];
   for (let i = 0; i < 100; i++) {
     const node = (
       <Button key={i} onClick={linkEvent(null, handleClick)}>
@@ -59,7 +59,7 @@ export const ListOfButtonsWithLinkEvent = () => {
 };
 
 export const ListOfButtonsWithIcons = () => {
-  const nodes: Inferno.InfernoElement[] = [];
+  const nodes: JSX.Element[] = [];
   for (let i = 0; i < 100; i++) {
     const node = (
       <Button key={i} icon={'arrow-left'}>
@@ -72,7 +72,7 @@ export const ListOfButtonsWithIcons = () => {
 };
 
 export const ListOfButtonsWithTooltips = () => {
-  const nodes: Inferno.InfernoElement[] = [];
+  const nodes: JSX.Element[] = [];
   for (let i = 0; i < 100; i++) {
     const node = (
       <Button key={i} tooltip={'Hello world!'}>

@@ -11,9 +11,9 @@
 	if(!.)
 		return
 	var/dat = list()
-	dat += "<a href='?src=\ref[src]'>Refresh</a> | "
+	dat += "<a href='byond://?src=\ref[src]'>Refresh</a> | "
 	dat += get_filter_html(user)
-	dat += " | <a href='?src=\ref[src];reset=1'>Reset</a>"
+	dat += " | <a href='byond://?src=\ref[src];reset=1'>Reset</a>"
 	dat += "<HR>"
 	dat += "<table border='1' style='width:100%;border-collapse:collapse;'>"
 	dat += "<tr><th style='text-align:left;'>Time</th><th style='text-align:left;'>Attacker</th><th style='text-align:left;'>Intent</th><th style='text-align:left;'>Zone Sel</th><th style='text-align:left;'>Victim</th></tr>"
@@ -132,9 +132,9 @@
 	. = list()
 	. += "Must have clients: "
 	if(filter_missing_clients)
-		. += "<span class='linkOn'>Yes</span><a href='?src=\ref[src];no=1'>No</a>"
+		. += "<span class='linkOn'>Yes</span><a href='byond://?src=\ref[src];no=1'>No</a>"
 	else
-		. += "<a href='?src=\ref[src];yes=1'>Yes</a><span class='linkOn'>No</span>"
+		. += "<a href='byond://?src=\ref[src];yes=1'>Yes</a><span class='linkOn'>No</span>"
 	. = jointext(.,null)
 
 /attack_filter/no_client/OnTopic(href_list)
@@ -170,7 +170,7 @@
 	ckey_filter = null
 
 /attack_filter/must_be_given_ckey/get_html()
-	return "[description]: <a href='?src=\ref[src];select_ckey=1'>[ckey_filter ? ckey_filter : "*ANY*"]</a>"
+	return "[description]: <a href='byond://?src=\ref[src];select_ckey=1'>[ckey_filter ? ckey_filter : "*ANY*"]</a>"
 
 /attack_filter/must_be_given_ckey/OnTopic(href_list)
 	if(!href_list["select_ckey"])
